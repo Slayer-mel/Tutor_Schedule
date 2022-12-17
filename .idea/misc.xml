@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.153" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/delete_menu.xml" value="0.1305" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/gradient.xml" value="0.153" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/ic_add.xml" value="0.153" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.153" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/ic_delete.xml" value="0.153" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/ic_edit.xml" value="0.153" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/ic_launcher_background.xml" value="0.153" />
@@ -15,11 +17,16 @@
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/shape_background.xml" value="0.153" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/activity_main.xml" value="0.14492753623188406" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/add_item.xml" value="0.33" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/custom_row.xml" value="0.21" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/fragment_add.xml" value="0.21" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/fragment_list.xml" value="0.18" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/fragment_pupil_full_info.xml" value="0.14492753623188406" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/fragment_pupils_list.xml" value="0.25" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/fragment_update.xml" value="0.14492753623188406" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/list_item.xml" value="0.33" />
-        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/rv_item.xml" value="0.14492753623188406" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/rv_item.xml" value="0.33" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/menu/delete_menu.xml" value="0.22" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/menu/show_menu.xml" value="0.2" />
       </map>
     </option>

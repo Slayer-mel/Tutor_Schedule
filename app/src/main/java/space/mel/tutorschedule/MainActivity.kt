@@ -1,30 +1,19 @@
 package space.mel.tutorschedule
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import space.mel.tutorschedule.databinding.ActivityMainBinding
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+
 
 class MainActivity : AppCompatActivity() {
-
-    lateinit var mainBinding: ActivityMainBinding
-    lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mainBinding.root)
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
-        navController = navHostFragment.navController
+        setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null) {
-            navigateToFragment(HomeFragment())
-        }
     }
-    private fun navigateToFragment(fragment: Fragment) {
-        //navController.navigate(R.id.action_homeFragment_to_findInfoFragment2)
+
+    override fun onSupportNavigateUp(): Boolean { //кнопка Назад в виде стрелочки
+        val navController = findNavController(R.id.fragment)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
