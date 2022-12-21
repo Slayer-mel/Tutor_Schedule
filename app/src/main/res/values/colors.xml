@@ -8,9 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gradientTop">#15ECA8</color>
-    <color name="gradientBottom">#115ede</color>
+    <color name="blue">#115ede</color>
+    <color name="skyBlue">#3F75FF</color>
     <color name="orange_main">#D98014</color>
-    <color name="yellow">#F2A922</color>
+    <color name="yellow">#DCD43B</color>
     <color name="grey">#323E40</color>
     <color name="brown">#732002</color>
     <color name="orange">#D9501E</color>
