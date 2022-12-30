@@ -34,7 +34,8 @@ class UpdateFragment : Fragment() {
         updateBinding.updateBtn.setOnClickListener {
             updateItem()
         }
-        //setHasOptionsMenu(true)
+        //add Delete menu
+        setHasOptionsMenu(true)
 
         return updateBinding.root
     }

@@ -6,7 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import space.mel.tutorschedule.model.User
 
-@Database(entities = [User::class], version = 3, exportSchema = false)
+@Database(
+    entities = [User::class],
+    version = 3,
+    exportSchema = false
+)
 abstract class UserDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao

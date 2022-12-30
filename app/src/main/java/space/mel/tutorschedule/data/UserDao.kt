@@ -2,6 +2,7 @@ package space.mel.tutorschedule.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 import space.mel.tutorschedule.model.User
 
 @Dao
@@ -21,5 +22,8 @@ interface UserDao {
 
     @Query("SELECT * FROM user_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<User>>
+
+    @Query("SELECT  * FROM user_table WHERE firstName LIKE :searchQuery OR grade LIKE :searchQuery")
+    fun searchDatabase (searchQuery: String): Flow<List<User>>
 
 }
