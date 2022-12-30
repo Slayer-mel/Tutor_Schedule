@@ -11,6 +11,7 @@
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/ic_edit.xml" value="0.153" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/ic_launcher_background.xml" value="0.153" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/ic_more.xml" value="0.153" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/ic_search.xml" value="0.1665" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/ic_warning.xml" value="0.153" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/roundstyle.xml" value="0.153" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/drawable/shape_background.xml" value="0.153" />
@@ -26,9 +27,10 @@
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/home_fragment.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/list_fragment.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/list_item.xml" value="0.33" />
-        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/rv_item.xml" value="0.14492753623188406" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/rv_item.xml" value="0.41" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/update_fragment.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/menu/delete_menu.xml" value="0.2" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/menu/main_menu.xml" value="0.2" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/menu/show_menu.xml" value="0.2" />
       </map>
     </option>

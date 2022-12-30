@@ -11,11 +11,11 @@
 
 
     <TextView
-        android:id="@+id/firstName_txt"
+        android:id="@+id/tvFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="John"
+        android:text="Имя"
         android:textStyle="bold"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,14 +23,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/age_txt"
+        android:id="@+id/tvGrade"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:text="(25)"
+        android:text="класс"
         android:textStyle="bold"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/firstName_txt"
+        app:layout_constraintStart_toEndOf="@+id/tvFirstName"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

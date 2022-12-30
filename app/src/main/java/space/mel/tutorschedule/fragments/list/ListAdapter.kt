@@ -16,11 +16,10 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class MyViewHolder(val myBinding: CustomRowBinding) : RecyclerView.ViewHolder(myBinding.root) {
-
+    class MyViewHolder(val myBinding: CustomRowBinding) : RecyclerView.ViewHolder(myBinding.root){
         fun setData(user: User) {
-            myBinding.firstNameTxt.text = user.firstName
-            myBinding.ageTxt.text = user.grade.toString()
+            myBinding.tvFirstName.text = user.firstName
+            myBinding.tvGrade.text = user.grade.toString()
         }
     }
 
@@ -42,6 +41,4 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
             holder.itemView.findNavController().navigate(action)
         }
     }
-
-
 }
