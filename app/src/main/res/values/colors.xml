@@ -15,4 +15,6 @@
     <color name="grey">#323E40</color>
     <color name="brown">#732002</color>
     <color name="orange">#D9501E</color>
+    <color name="background_search">#46424B1A</color>
+    <color name="background_main">#D8CBEB</color>
 </resources>
