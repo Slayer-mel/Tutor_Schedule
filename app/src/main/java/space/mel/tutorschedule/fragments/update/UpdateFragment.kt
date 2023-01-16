@@ -1,11 +1,11 @@
 package space.mel.tutorschedule.fragments.update
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,14 +19,14 @@ class UpdateFragment : Fragment() {
     private lateinit var updateBinding: UpdateFragmentBinding
     private val args by navArgs<UpdateFragmentArgs>()
 
-    private lateinit var mUserViewModel: UserViewModel
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         updateBinding = UpdateFragmentBinding.inflate(layoutInflater)
-        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         updateBinding.edtUpdateFirstName.setText(args.currentUser.firstName)
         updateBinding.edtUpdateGrade.setText(args.currentUser.grade.toString())
@@ -48,7 +48,7 @@ class UpdateFragment : Fragment() {
             // Create User Object
             val updatedUser = User(args.currentUser.id, firstName, grade)
             // Update Current User
-            mUserViewModel.updateUser(updatedUser)
+            userViewModel.updateUser(updatedUser)
             Toast.makeText(requireContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show()
             // Navigate Back
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
@@ -75,7 +75,7 @@ class UpdateFragment : Fragment() {
     private fun deleteUser() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes"){_,_->
-        mUserViewModel.deleteUser(args.currentUser)
+        userViewModel.deleteUser(args.currentUser)
             Toast.makeText(
                 requireContext(),
                 "Successfully removed ${args.currentUser.firstName}",

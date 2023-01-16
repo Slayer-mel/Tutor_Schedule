@@ -15,7 +15,7 @@ import space.mel.tutorschedule.viewmodel.UserViewModel
 
 class AddFragment : Fragment() {
     private lateinit var addBinding: AddFragmentBinding
-    private lateinit var mUserViewModel: UserViewModel
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +23,7 @@ class AddFragment : Fragment() {
     ): View {
         addBinding = AddFragmentBinding.inflate(layoutInflater)
 
-        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         addBinding.addBtn.setOnClickListener {
             insertDataToDatabase()
         }
@@ -41,7 +41,7 @@ class AddFragment : Fragment() {
             // Create User Object
             val user = User(0, name, Integer.parseInt(grade.toString()))
             // Add Data to Database
-            mUserViewModel.addUser(user)
+            userViewModel.addUser(user)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
             // Navigate Back
             findNavController().navigate(R.id.action_addFragment_to_listFragment)

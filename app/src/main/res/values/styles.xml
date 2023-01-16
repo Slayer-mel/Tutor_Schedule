@@ -7,4 +7,9 @@
         <item name="colorAccent">@color/teal_200</item>
     </style>
 
+    <!--Calendar style-->
+    <style name="datePickerTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="colorAccent">@color/colorCalendar</item>
+    </style>
+
 </resources>

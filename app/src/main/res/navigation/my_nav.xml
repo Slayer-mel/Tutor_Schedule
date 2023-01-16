@@ -11,12 +11,24 @@
         android:name="space.mel.tutorschedule.fragments.list.ListFragment"
         android:label="List"
         tools:layout="@layout/list_fragment" >
+        <argument
+            android:name="currentUser"
+            app:argType="space.mel.tutorschedule.model.User"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+
+        <!--app:nullable="true"
+        android:defaultValue="@null"-->
+
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
         <action
             android:id="@+id/action_listFragment_to_updateFragment"
             app:destination="@id/updateFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -40,4 +52,8 @@
             android:name="currentUser"
             app:argType="space.mel.tutorschedule.model.User" />
     </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="space.mel.tutorschedule.fragments.calendar.CalendarFragment"
+        android:label="CalendarFragment" />
 </navigation>

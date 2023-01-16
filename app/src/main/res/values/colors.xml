@@ -17,4 +17,5 @@
     <color name="orange">#D9501E</color>
     <color name="background_search">#46424B1A</color>
     <color name="background_main">#D8CBEB</color>
+    <color name="colorCalendar">#115ede</color>
 </resources>

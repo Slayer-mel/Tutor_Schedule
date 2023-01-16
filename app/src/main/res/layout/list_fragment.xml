@@ -14,6 +14,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="4dp">
+        
+        <Button
+            android:id="@+id/btn_toCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="Add"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search"/>
+
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search"
@@ -38,7 +48,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="@id/search"
             app:layout_constraintStart_toStartOf="@id/search"
-            app:layout_constraintTop_toBottomOf="@+id/search"
+            app:layout_constraintTop_toBottomOf="@+id/btn_toCalendar"
             tools:listitem="@layout/custom_row" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
