@@ -7,19 +7,19 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.ListFragmentBinding
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
 class ListFragment : Fragment() {
     private lateinit var listBinding: ListFragmentBinding
-    private lateinit var userViewModel: UserViewModel
+    private val listFragmentUserViewModel by viewModel<UserViewModel>()
     private val myAdapter: ListAdapter by lazy { ListAdapter() }
 
     override fun onCreateView(
@@ -33,9 +33,8 @@ class ListFragment : Fragment() {
         listBinding.recyclerview.adapter = myAdapter
 
         // UserViewModel
-        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
-        userViewModel.readAllData.observe(viewLifecycleOwner, Observer { user ->
-            myAdapter.setItem(user)
+        listFragmentUserViewModel.readAllData.observe(viewLifecycleOwner, Observer { userList ->
+            myAdapter.setItems(userList)
         })
 
         //swipe delete item from Room DB
@@ -54,11 +53,11 @@ class ListFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val pos = viewHolder.bindingAdapterPosition
                 val deletedUser = myAdapter.userList[pos]
-                userViewModel.deleteUser(deletedUser)
+                listFragmentUserViewModel.deleteUser(deletedUser)
                 view?.let {
                     Snackbar.make(it, "Ученик удалён", Snackbar.LENGTH_LONG).apply {
                         setAction("Отмена") {
-                            userViewModel.addUser(deletedUser)
+                            listFragmentUserViewModel.addUser(deletedUser)
                         }
                         show()
                     }
@@ -92,11 +91,15 @@ class ListFragment : Fragment() {
         return listBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    listFragmentUserViewModel.fetchAllData()
+    }
+
     private fun searchDatabase(query: String) {
         val searchQuery = "%$query%"
-        userViewModel.searchDatabase(searchQuery).observe(this) { list ->
+        listFragmentUserViewModel.searchDatabase(searchQuery).observe(this) { list ->
             list.let { listOfUser ->
-                myAdapter.setItem(listOfUser)
+                myAdapter.setItems(listOfUser)
             }
         }
     }

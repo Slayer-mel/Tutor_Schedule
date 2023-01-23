@@ -21,3 +21,6 @@ https://www.youtube.com/watch?v=ZZ60NXzT4ig
 https://www.youtube.com/watch?v=hjv4xRgN24M
 //Room
 https://www.youtube.com/watch?v=-LNg-K7SncM
+
+// Delete on swipe recyclerview with Room Library
+https://www.youtube.com/watch?v=v9cnX6R9yug

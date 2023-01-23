@@ -1,25 +1,27 @@
 package space.mel.tutorschedule.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import space.mel.tutorschedule.data.UserDatabase
 import space.mel.tutorschedule.model.User
 import space.mel.tutorschedule.repository.UserRepository
 
-class UserViewModel(application: Application) : AndroidViewModel(application) {
-
-    val readAllData: LiveData<List<User>>
+class UserViewModel(
     private val repository: UserRepository
+) : ViewModel() {
+
+    val readAllData: MutableLiveData<List<User>> = MutableLiveData<List<User>>()
+    //private val repository: UserRepository = UserRepository(userDao)
 
     init {
-        val userDao = UserDatabase.getDatabase(application).userDao()
-        repository = UserRepository(userDao)
-        readAllData = repository.readAllData
+        //val userDao = UserDatabase.getDatabase(application).userDao()
+        //repository = UserRepository(userDao)
+        //readAllData = repository.readAllData
+    }
+    fun fetchAllData(){
+        viewModelScope.launch(Dispatchers.IO) {
+            readAllData.postValue(repository.readAllData())
+        }
     }
 
     fun addUser(user: User) {

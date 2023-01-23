@@ -12,7 +12,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     var userList = emptyList<User>()
 
     //передаем данные и оповещаем адаптер о необходимости обновить данные
-    fun setItem(user: List<User>) {
+    fun setItems(user: List<User>) {
         this.userList = user
         notifyDataSetChanged()
     }

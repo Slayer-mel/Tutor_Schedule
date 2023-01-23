@@ -19,7 +19,7 @@
             android:id="@+id/btn_toCalendar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:text="Add"
+            android:text="Назначаить время и дату"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search"/>
