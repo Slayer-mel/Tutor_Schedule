@@ -1,10 +1,15 @@
 <resources>
-    <!-- Base application theme. -->
+    <!-- Base application theme. -->NoActionBar
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryDark">@color/purple_700</item>
         <item name="colorAccent">@color/teal_200</item>
+    </style>
+
+    <!--Calendar style-->
+    <style name="datePickerTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="colorAccent">@color/colorCalendar</item>
     </style>
 
 </resources>

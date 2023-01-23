@@ -1,0 +1,26 @@
+//Date and Time picker
+https://www.youtube.com/watch?v=4_aN8W0LOKo
+https://www.youtube.com/watch?v=NChchlCeihI
+https://www.youtube.com/watch?v=kbGM5IDMbnI
+
+
+//How to Disable Previous or Future Dates in Datepicker in Android JAVA
+https://www.geeksforgeeks.org/how-to-disable-previous-or-future-dates-in-datepicker-in-android/ 
+
+
+//Datepicker to ROOM
+https://medium.com/androiddevelopers/room-time-2b4cf9672b98
+https://stackoverflow.com/questions/50313525/room-using-date-field
+https://stackoverflow.com/questions/40497344/how-to-save-a-date-from-datepicker-into-sqlite-with-android-studio
+https://stackoverflow.com/questions/35821886/save-datepicker-date-to-database
+https://stackoverflow.com/questions/57333171/how-can-i-work-with-date-and-time-at-room
+
+
+//TypoConvertor
+https://www.youtube.com/watch?v=ZZ60NXzT4ig
+https://www.youtube.com/watch?v=hjv4xRgN24M
+//Room
+https://www.youtube.com/watch?v=-LNg-K7SncM
+
+// Delete on swipe recyclerview with Room Library
+https://www.youtube.com/watch?v=v9cnX6R9yug

@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.AddFragmentBinding
 import space.mel.tutorschedule.model.User
@@ -15,7 +15,7 @@ import space.mel.tutorschedule.viewmodel.UserViewModel
 
 class AddFragment : Fragment() {
     private lateinit var addBinding: AddFragmentBinding
-    private lateinit var mUserViewModel: UserViewModel
+    private val addFragmentUserViewModel by viewModel<UserViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +23,6 @@ class AddFragment : Fragment() {
     ): View {
         addBinding = AddFragmentBinding.inflate(layoutInflater)
 
-        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         addBinding.addBtn.setOnClickListener {
             insertDataToDatabase()
         }
@@ -41,7 +40,7 @@ class AddFragment : Fragment() {
             // Create User Object
             val user = User(0, name, Integer.parseInt(grade.toString()))
             // Add Data to Database
-            mUserViewModel.addUser(user)
+            addFragmentUserViewModel.addUser(user)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
             // Navigate Back
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
