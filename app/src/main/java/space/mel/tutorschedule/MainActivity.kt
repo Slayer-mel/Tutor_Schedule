@@ -6,7 +6,7 @@ import space.mel.tutorschedule.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-   private lateinit var mainBinding: ActivityMainBinding
+    lateinit var mainBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

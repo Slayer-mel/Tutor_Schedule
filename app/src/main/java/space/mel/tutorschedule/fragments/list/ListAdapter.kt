@@ -9,15 +9,13 @@ import space.mel.tutorschedule.model.User
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-    var userList = emptyList<User>()
+    private var userList = emptyList<User>()
 
-    //передаем данные и оповещаем адаптер о необходимости обновить данные
-    fun setItems(user: List<User>) {
+    fun setItem(user: List<User>) {
         this.userList = user
         notifyDataSetChanged()
     }
 
-    //внутренний класс ViewHolder описывает элементы представления списка и привязку  их к recyclerView
     class MyViewHolder(val myBinding: CustomRowBinding) : RecyclerView.ViewHolder(myBinding.root){
         fun setData(user: User) {
             myBinding.tvFirstName.text = user.firstName
@@ -25,7 +23,6 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         }
     }
 
-    //создает recyclerView Holder и инициализирует views для списка
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             CustomRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -36,7 +33,6 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         return userList.size
     }
 
-    //связывает views с содержимым
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = userList[position]
         holder.setData(currentItem)

@@ -1,12 +1,13 @@
 package space.mel.tutorschedule.repository
 
+import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 import space.mel.tutorschedule.data.UserDao
 import space.mel.tutorschedule.model.User
 
 class UserRepository(private val userDao: UserDao) {
 
-    fun readAllData(): List<User> = userDao.readAllData()
+    val readAllData: LiveData<List<User>> = userDao.readAllData()
 
     suspend fun addUser(user: User){
         userDao.addUser(user)
