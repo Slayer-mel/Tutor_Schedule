@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="contentDescription"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:id="@+id/listFragmentBlack">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rv_item_bg_2"
+        app:iconifiedByDefault="false"
+        android:focusable="false"
+        app:queryHint="Найти..."
+        android:inputType="textCapSentences"
+        android:theme="@style/SearchViewStyle"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/gilroy_medium"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:closeIcon="@drawable/ic_baseline_clear_24"
+        android:layout_alignParentEnd="true"
+        app:searchIcon="@drawable/ic_search" />
+
+    <TextView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/gilroy_medium"
+        android:text="Ученики"
+        android:gravity="center"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/search"
+        app:drawableStartCompat="@drawable/ic_chevron_left" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:paddingTop="6dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="@id/search"
+        app:layout_constraintTop_toBottomOf="@+id/search"
+        app:layout_constraintBottom_toTopOf="@id/bottomBackground"
+        android:layout_marginBottom="12dp"
+        tools:listitem="@layout/custom_row_black" />
+
+    <ImageView
+        android:id="@+id/bottomBackground"
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/bottom_background_gray_black"/>
+
+
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="5dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/white_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/btnHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_home_white_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/bottomBackground"
+        app:layout_constraintEnd_toStartOf="@+id/btnUsers"
+        android:layout_marginBottom="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/btnHome"
+        app:layout_constraintEnd_toEndOf="@id/btnHome"
+        app:layout_constraintTop_toBottomOf="@id/btnHome"
+        android:text="@string/list_fragment_btn_home_icon"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gilroy_regular"
+        android:textSize="12sp"
+        android:layout_marginTop="6dp"/>
+
+    <ImageView
+        android:id="@+id/btnUsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_users_blue"
+        app:layout_constraintStart_toEndOf="@id/btnHome"
+        app:layout_constraintBottom_toBottomOf="@id/btnHome"
+        app:layout_constraintEnd_toStartOf="@id/btnAddNewUser"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/btnUsers"
+        app:layout_constraintEnd_toEndOf="@id/btnUsers"
+        app:layout_constraintTop_toBottomOf="@id/btnHome"
+        android:text="@string/list_fragment_btn_users_icon"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gilroy_regular"
+        android:textSize="12sp"
+        android:layout_marginTop="6dp"/>
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/btnAddNewUser"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="45dp"
+        app:layout_constraintStart_toEndOf="@+id/btnUsers"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnMessage"
+        android:background="@color/accentBlue"
+        app:shapeAppearanceOverlay="@style/Circular"/>
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_add_black"
+        app:layout_constraintStart_toStartOf="@id/btnAddNewUser"
+        app:layout_constraintEnd_toEndOf="@id/btnAddNewUser"
+        app:layout_constraintTop_toTopOf="@id/btnAddNewUser"
+        app:layout_constraintBottom_toBottomOf="@id/btnAddNewUser"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/btnAddNewUser"
+        app:layout_constraintEnd_toEndOf="@id/btnAddNewUser"
+        app:layout_constraintTop_toBottomOf="@id/btnHome"
+        android:text="@string/list_fragment_btn_add_user_text"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gilroy_regular"
+        android:textSize="12sp"/>
+
+
+    <ImageView
+        android:id="@+id/btnMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_message_white_1"
+        app:layout_constraintStart_toEndOf="@id/btnAddNewUser"
+        app:layout_constraintEnd_toStartOf="@id/btnProfile"
+        app:layout_constraintBottom_toBottomOf="@id/btnHome"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/btnMessage"
+        app:layout_constraintEnd_toEndOf="@id/btnMessage"
+        app:layout_constraintTop_toBottomOf="@id/btnHome"
+        android:text="@string/list_fragment_btn_message_icon"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gilroy_regular"
+        android:textSize="12sp"
+        android:layout_marginTop="6dp"/>
+
+    <ImageView
+        android:id="@+id/btnProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_user_white"
+        app:layout_constraintStart_toEndOf="@id/btnMessage"
+        app:layout_constraintBottom_toBottomOf="@id/btnHome"
+        app:layout_constraintEnd_toEndOf="@id/bottomBackground"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/btnProfile"
+        app:layout_constraintEnd_toEndOf="@id/btnProfile"
+        app:layout_constraintTop_toBottomOf="@id/btnHome"
+        android:text="@string/list_fragment_btn_profile_icon"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gilroy_regular"
+        android:textSize="12sp"
+        android:layout_marginTop="6dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

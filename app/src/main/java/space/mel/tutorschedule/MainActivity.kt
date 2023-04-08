@@ -6,11 +6,11 @@ import space.mel.tutorschedule.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-   private lateinit var mainBinding: ActivityMainBinding
+   private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mainBinding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }
