@@ -7,9 +7,73 @@
         <item name="colorAccent">@color/teal_200</item>
     </style>
 
-    <!--Calendar style-->
+    <!--CalendarPicker style-->
     <style name="datePickerTheme" parent="android:Theme.Material.Light.Dialog">
-        <item name="colorAccent">@color/colorCalendar</item>
+        <!--Header Background Color and selected Day Background Color-->
+        <item name="android:colorAccent">@color/accentBlue</item>
+        <!--Days unselected Text Color and Month Text Color-->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!--Picker Background Color-->
+        <item name="android:windowBackground">@color/c2c2c2c</item>
+        <!--day , month-->
+        <item name="android:textColorPrimaryInverse">@color/black</item>
+        <!-- year-->
+        <item name="android:textColorSecondaryInverse">@color/black</item>
+        <!--Days of Week TextColor-->
+        <item name="android:textColorSecondary">@color/gray</item>
+        <!--Buttons Style (Text Color & backgroundTint)-->
+        <item name="android:buttonBarNegativeButtonStyle">@style/Button_Negative</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/Button_Positive</item>
     </style>
 
+
+    <!--TimePicker style-->
+    <style name="timePickerTheme" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <!--Header Background Color and selected Day Background Color-->
+        <item name="android:colorAccent">@color/accentBlue</item>
+        <!--Days unselected Text Color and Month Text Color-->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!--Picker Background Color-->
+        <item name="android:windowBackground">@color/c2c2c2c</item>
+        <!--day , month-->
+        <item name="android:textColorPrimaryInverse">@color/black</item>
+        <!-- year-->
+        <item name="android:textColorSecondaryInverse">@color/black</item>
+        <!--Days of Week TextColor-->
+        <item name="android:textColorSecondary">@color/gray</item>
+        <!--Buttons Style (Text Color & backgroundTint)-->
+        <item name="android:buttonBarNegativeButtonStyle">@style/Button_Negative</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/Button_Positive</item>
+        <item name="android:timePickerMode">spinner</item>
+    </style>
+
+    <!--Negative Button for Date and Time Pickers-->
+    <style name="Button_Negative" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:backgroundTint">@color/c2c2c2c</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/white</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginEnd">24dp</item>
+        <item name="fontFamily">@font/gilroy_medium</item>
+    </style>
+
+    <!--Positive Button for Date and Time Pickers-->
+    <style name="Button_Positive" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:backgroundTint">@color/accentBlue</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/white</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/gilroy_medium</item>
+    </style>
+
+    <!--for Splash Screen-->
+    <style name="SplashStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground" >@drawable/splash_screen</item>
+    </style>
 </resources>

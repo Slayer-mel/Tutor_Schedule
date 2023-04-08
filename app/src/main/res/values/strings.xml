@@ -2,4 +2,46 @@
     <string name="app_name">Расписание репетитора</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!--common Strings -->
+    <string name="common_btn_cancel_gray_background">Отмена</string>
+    <string name="common_btn_save_blue_background">Сохранить</string>
+    <string name="common_tv_name">Имя</string>
+    <string name="common_grade">Класс</string>
+
+
+    <!--Strings for AddUserFragment-->
+    <string name="add_fragment_btn_back">Новый ученик</string>
+    <string name="add_fragment_upload_photo">Загрузить изображение</string>
+    <string name="add_fragment_telephone_hint">+380123456789</string>
+
+    <!--Strings for ListUserFragment-->
+    <string name="list_fragment_btn_back">Ученики</string>
+    <string name="list_fragment_btn_home_icon">Главная</string>
+    <string name="list_fragment_btn_users_icon">Ученики</string>
+    <string name="list_fragment_btn_add_user_text">Добавить</string>
+    <string name="list_fragment_btn_message_icon">Чаты</string>
+    <string name="list_fragment_btn_profile_icon">Профиль</string>
+
+    <!--Strings for UpdateUserFragment-->
+    <string name="update_fragment_btn_back">Редактировать профиль</string>
+    <string name="update_fragment_mobile_hint">Мобильный телефон</string>
+    <string name="update_fragment_telegram_hint">Telegram Номер/ID</string>
+    <string name="update_fragment_mom_or_dad_hint">Мама/папа</string>
+    <string name="update_fragment_mom_or_dad_name_hint">Имя родителя</string>
+
+    <!--Strings for UserFullInformationFragment-->
+    <string name="user_full_information_fragment_btn_back">Ученик</string>
+    <string name="user_full_information_fragment_btn_edit">Редактировать</string>
+    <string name="user_full_information_fragment_btn_telegram_write_message">Написать в Telegram</string>
+    <string name="user_full_information_fragment_btn_make_lesson">Назначить занятие</string>
+    <string name="user_full_information_fragment_btn_delete_user">Удалить ученика</string>
+
+    <!--Strings for AddLessonFragment-->
+    <string name="add_lesson_fragment_tv_at">в</string>
+    <string name="add_lesson_fragment_tv_formatter">EEEE, dd MMMM yyyy %1$s HH:mm</string>
+    <string name="add_lesson_fragment_tv_name_grade_hint">Имя ученика и класс</string>
+    <string name="add_lesson_fragment_tv_date">Выбрать дату</string>
+
 </resources>

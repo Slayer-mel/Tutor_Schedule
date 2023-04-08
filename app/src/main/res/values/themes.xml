@@ -5,7 +5,9 @@
         <item name="android:colorBackground">@color/background_main</item> // цвет фона-->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/skyBlue</item>
-        <item name="colorPrimaryVariant">@color/skyBlue</item>
+        <!--top color-->
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -14,5 +16,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!-- Time Picker -->
+        <item name="android:timePickerStyle">@style/timePickerTheme</item>
+
+    </style>
+    <!-- Colors for searchView -->
+    <style name="SearchViewStyle">
+        <item name="android:editTextColor">@color/white</item>
     </style>
 </resources>

@@ -7,7 +7,7 @@ import space.mel.tutorschedule.model.User
 @Dao
 interface UserDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUser(user: User)
 
     @Update
@@ -20,8 +20,12 @@ interface UserDao {
     suspend fun deleteAllUsers()
 
     @Query("SELECT * FROM user_table ORDER BY id ASC")
-    fun readAllData(): List<User>
+    suspend fun readAllData(): List<User>
 
-    @Query("SELECT  * FROM user_table WHERE firstName LIKE :searchQuery OR grade LIKE :searchQuery")
+    @Query("SELECT  * FROM user_table WHERE name LIKE :searchQuery OR grade LIKE :searchQuery")
     fun searchDatabase (searchQuery: String): Flow<List<User>>
+
+    @Query("SELECT * FROM user_table")
+    fun getUser() : Flow<List<User>>
+
 }

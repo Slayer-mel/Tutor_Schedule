@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="contentDescription"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black">
+
+    <TextView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/gilroy_medium"
+        android:text="@string/user_full_information_fragment_btn_back"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:drawableStartCompat="@drawable/ic_chevron_left" />
+
+    <TextView
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/accentBlue"
+        android:textSize="14sp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/user_full_information_fragment_btn_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack" />
+
+    <TextView
+        android:id="@+id/imgUserBack"
+        android:layout_width="0dp"
+        android:layout_height="128dp"
+        android:background="@drawable/rv_item_bg_2"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgUser"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_margin="18dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="@id/imgUserBack"
+        app:layout_constraintTop_toTopOf="@id/imgUserBack"
+        app:layout_constraintBottom_toBottomOf="@id/imgUserBack"
+        app:shapeAppearanceOverlay="@style/Circular"
+        android:src="@drawable/ic_user_big_photo_gray"/>
+
+    <ImageView
+        android:id="@+id/icChangePhoto"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintBottom_toBottomOf="@id/imgUser"
+        app:layout_constraintEnd_toEndOf="@id/imgUser"
+        android:src="@drawable/ic_change_photo"/>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/common_tv_name"
+        android:textSize="24sp"
+        android:fontFamily="@font/gilroy_medium"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/imgUser"
+        app:layout_constraintEnd_toEndOf="@id/imgUserBack"
+        app:layout_constraintTop_toTopOf="@id/imgUser"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="18dp"/>
+
+    <TextView
+        android:id="@+id/tvGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textColorHint="@color/gray"
+        android:hint="@string/common_grade"
+        android:textSize="20sp"
+        android:fontFamily="@font/gilroy_medium"
+        android:textColor="@color/gray"
+        app:layout_constraintStart_toStartOf="@id/tvName"
+        app:layout_constraintBottom_toBottomOf="@id/imgUser"/>
+
+    
+    <TextView
+        android:id="@+id/btnMakeCall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/imgUserBack"
+        app:layout_constraintEnd_toEndOf="@id/imgUserBack"
+        app:layout_constraintTop_toBottomOf="@id/imgUserBack"
+        android:background="@drawable/rv_item_bg_2"
+        android:layout_marginTop="24dp"
+        android:padding="18dp"
+        android:hint="Введите телефон"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/gilroy_regular"/>
+
+    <ImageView
+        android:id="@+id/icMakeCall"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintTop_toTopOf="@id/btnMakeCall"
+        app:layout_constraintBottom_toBottomOf="@id/btnMakeCall"
+        app:layout_constraintEnd_toEndOf="@id/btnMakeCall"
+        android:src="@drawable/ic_phone_call"/>
+
+    <TextView
+        android:id="@+id/btnTelegramWriteMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/imgUserBack"
+        app:layout_constraintEnd_toEndOf="@id/imgUserBack"
+        app:layout_constraintTop_toBottomOf="@id/btnMakeCall"
+        android:background="@drawable/rv_item_bg_2"
+        android:layout_marginTop="12dp"
+        android:padding="18dp"
+        android:text="@string/user_full_information_fragment_btn_telegram_write_message"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/gilroy_regular"/>
+
+    <ImageView
+        android:id="@+id/icTelegramWriteMessage"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintTop_toTopOf="@id/btnTelegramWriteMessage"
+        app:layout_constraintBottom_toBottomOf="@id/btnTelegramWriteMessage"
+        app:layout_constraintEnd_toEndOf="@id/btnTelegramWriteMessage"
+        android:src="@drawable/ic_telegram"/>
+
+    <TextView
+        android:id="@+id/btnMakeLesson"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/imgUserBack"
+        app:layout_constraintEnd_toEndOf="@id/imgUserBack"
+        app:layout_constraintTop_toBottomOf="@id/btnTelegramWriteMessage"
+        android:background="@drawable/rv_item_bg_2"
+        android:layout_marginTop="12dp"
+        android:padding="18dp"
+        android:text="@string/user_full_information_fragment_btn_make_lesson"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/gilroy_regular"/>
+
+    <ImageView
+        android:id="@+id/icCalendarClock"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintTop_toTopOf="@id/btnMakeLesson"
+        app:layout_constraintBottom_toBottomOf="@id/btnMakeLesson"
+        app:layout_constraintEnd_toEndOf="@id/btnMakeLesson"
+        android:src="@drawable/ic_calendar_clock"/>
+
+    <TextView
+        android:id="@+id/btnDeleteUser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/imgUserBack"
+        app:layout_constraintEnd_toEndOf="@id/imgUserBack"
+        app:layout_constraintTop_toBottomOf="@id/btnMakeLesson"
+        android:background="@drawable/rv_item_bg_2"
+        android:layout_marginTop="24dp"
+        android:padding="18dp"
+        android:text="@string/user_full_information_fragment_btn_delete_user"
+        android:textColor="@color/red"
+        android:textSize="18sp"
+        android:fontFamily="@font/gilroy_regular"/>
+
+    <ImageView
+        android:id="@+id/ivDeleteUser"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintTop_toTopOf="@id/btnDeleteUser"
+        app:layout_constraintBottom_toBottomOf="@id/btnDeleteUser"
+        app:layout_constraintEnd_toEndOf="@id/btnDeleteUser"
+        android:src="@drawable/ic_trash"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

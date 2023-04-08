@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="contentDescription"
+    android:id="@+id/rowLayoutBlack"
+    android:layout_width="match_parent"
+    android:layout_height="51dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/rv_item_bg_2">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Имя"
+        android:fontFamily="@font/gilroy_medium"
+        android:textStyle="bold"
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/rowLayoutBlack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11"
+        android:fontFamily="@font/gilroy_medium"
+        android:textStyle="bold"
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        android:paddingStart="12dp"
+        android:paddingEnd="36dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:background="@drawable/rv_item_bg_2"
+        app:layout_constraintBottom_toBottomOf="@id/tvName"
+        app:layout_constraintTop_toTopOf="@id/tvName"
+        app:layout_constraintEnd_toStartOf="@+id/imgChevronRight"
+        android:layout_marginEnd="4dp"/>
+
+    <ImageView
+        android:id="@+id/imgChevronRight"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        app:layout_constraintEnd_toEndOf="@id/rowLayoutBlack"
+        app:layout_constraintTop_toTopOf="@id/tvGrade"
+        app:layout_constraintBottom_toBottomOf="@id/tvGrade"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/ic_chevron_right"/>
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        app:layout_constraintEnd_toEndOf="@id/tvGrade"
+        app:layout_constraintTop_toTopOf="@id/tvGrade"
+        app:layout_constraintBottom_toBottomOf="@id/tvGrade"
+        android:src="@drawable/ic_school_cap"
+        android:layout_marginEnd="12dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
