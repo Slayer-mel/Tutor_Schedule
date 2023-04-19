@@ -1,4 +1,4 @@
-package space.mel.tutorschedule.fragments.user.updateUser
+package space.mel.tutorschedule.fragments.user
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import space.mel.tutorschedule.R
-import space.mel.tutorschedule.databinding.UpdateFragmentBlackBinding
+import space.mel.tutorschedule.databinding.UpdateUserFragmentBlackBinding
 import space.mel.tutorschedule.model.Parent
 import space.mel.tutorschedule.model.User
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
 class UpdateUserFragment : Fragment() {
-    private var _binding: UpdateFragmentBlackBinding? = null
+    private var _binding: UpdateUserFragmentBlackBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModel<UserViewModel>()
     //private val userViewModel : UserViewModel by activityViewModels()
@@ -25,7 +25,7 @@ class UpdateUserFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = UpdateFragmentBlackBinding.inflate(layoutInflater)
+        _binding = UpdateUserFragmentBlackBinding.inflate(layoutInflater)
 
         return binding.root
     }

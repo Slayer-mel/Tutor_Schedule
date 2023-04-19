@@ -96,9 +96,8 @@
         app:layout_constraintStart_toStartOf="@id/tvName"
         app:layout_constraintBottom_toBottomOf="@id/imgUser"/>
 
-    
     <TextView
-        android:id="@+id/btnMakeCall"
+        android:id="@+id/btnAllLessonsList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/imgUserBack"
@@ -106,6 +105,32 @@
         app:layout_constraintTop_toBottomOf="@id/imgUserBack"
         android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="24dp"
+        android:padding="18dp"
+        android:text="Список занятий"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/gilroy_regular"/>
+
+    <ImageView
+        android:id="@+id/icMakeCalll"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintTop_toTopOf="@id/btnAllLessonsList"
+        app:layout_constraintBottom_toBottomOf="@id/btnAllLessonsList"
+        app:layout_constraintEnd_toEndOf="@id/btnAllLessonsList"
+        android:src="@drawable/ic_list_blue"/>
+
+    
+    <TextView
+        android:id="@+id/btnMakeCall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/imgUserBack"
+        app:layout_constraintEnd_toEndOf="@id/imgUserBack"
+        app:layout_constraintTop_toBottomOf="@id/btnAllLessonsList"
+        android:background="@drawable/rv_item_bg_2"
+        android:layout_marginTop="12dp"
         android:padding="18dp"
         android:hint="Введите телефон"
         android:textColor="@color/white"
@@ -171,6 +196,9 @@
         app:layout_constraintBottom_toBottomOf="@id/btnMakeLesson"
         app:layout_constraintEnd_toEndOf="@id/btnMakeLesson"
         android:src="@drawable/ic_calendar_clock"/>
+
+
+
 
     <TextView
         android:id="@+id/btnDeleteUser"

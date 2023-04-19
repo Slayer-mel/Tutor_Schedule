@@ -1,4 +1,4 @@
-package space.mel.tutorschedule.fragments.user.userFullInformation
+package space.mel.tutorschedule.fragments.user
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -49,8 +49,7 @@ class UserFullInformation : Fragment() {
         with(binding) {
             btnMakeLesson.setOnClickListener {
                 if (userCurrent != null) {
-                    findNavController().navigate(R.id.action_userFullInformation_to_addLesson)
-                    //putBundleToSetDateAndTime(userCurrent)
+                   findNavController().navigate(R.id.action_userFullInformation_to_addLesson)
                 }
             }
             btnEdit.setOnClickListener {
@@ -110,13 +109,6 @@ class UserFullInformation : Fragment() {
                 }
             }
 
-            //TEST//////////////////////////////////////////////////////////////////////////////////
-            tvName.setOnClickListener {
-                val inputText = "+380 66 961 79 35"
-                val text = removeWhiteSpace(inputText)
-                Toast.makeText(requireContext(), "https://t.me/$text", Toast.LENGTH_LONG).show()
-            }
-
             btnMakeCall.setOnClickListener {
                 val inputNumber = userViewModel.currentUserEditable.value?.phonePupilNumber
                 val number = removeWhiteSpace(inputNumber.toString())
@@ -129,6 +121,9 @@ class UserFullInformation : Fragment() {
 
             btnBack.setOnClickListener {
                 findNavController().navigate(R.id.action_userFullInformation_to_listFragmentBlack)
+            }
+            btnAllLessonsList.setOnClickListener {
+                findNavController().navigate(R.id.action_userFullInformation_to_listLessonFragment)
             }
         }
     }
@@ -150,16 +145,6 @@ class UserFullInformation : Fragment() {
             }
         }
     }
-    /*private fun putBundleToSetDateAndTime(user: User) {
-        findNavController().navigate(
-            R.id.action_userFullInformation_to_addLesson,
-            Bundle().apply {
-                putParcelable(
-                    "SetDateAndTime",
-                    user
-                )
-            })
-    }*/
 
     private fun removeWhiteSpace(number: String): String {
         return number.replace(" ", "")

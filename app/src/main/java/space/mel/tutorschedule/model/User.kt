@@ -20,7 +20,8 @@ data class User(
     val phonePupilNumber: String? = null,
     val telegramPupilNumberOrId: String?= null,
     @SerializedName("parent")
-    var parent: Parent? = null
+    var parent: Parent? = null,
+    val lessonList : List<Int>? = null
 ) : Parcelable, Serializable
 
 @Parcelize

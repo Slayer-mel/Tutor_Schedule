@@ -4,37 +4,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/listFragmentBlack">
+    app:startDestination="@id/listUserFragmentBlack">
 
 
     <fragment
-        android:id="@+id/listFragmentBlack"
-        android:name="space.mel.tutorschedule.fragments.user.listUser.ListUserFragment"
+        android:id="@+id/listUserFragmentBlack"
+        android:name="space.mel.tutorschedule.fragments.user.ListUserFragment"
         android:label="list_fragment_black"
-        tools:layout="@layout/list_fragment_black" >
+        tools:layout="@layout/list_user_fragment_black" >
         <action
             android:id="@+id/action_listFragmentBlack_to_userFullInformation"
             app:destination="@id/userFullInformation" />
         <action
             android:id="@+id/action_listFragmentBlack_to_addFragment"
-            app:destination="@id/addFragment" />
+            app:destination="@id/addUserFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addFragment"
-        android:name="space.mel.tutorschedule.fragments.user.addUser.AddUserFragment"
+        android:id="@+id/addUserFragment"
+        android:name="space.mel.tutorschedule.fragments.user.AddUserFragment"
         android:label="Add"
-        tools:layout="@layout/add_fragment_black" >
+        tools:layout="@layout/add_user_fragment_black" >
         <action
             android:id="@+id/action_addFragment_to_listFragmentBlack"
-            app:destination="@id/listFragmentBlack"
-            app:popUpTo="@id/listFragmentBlack"
+            app:destination="@id/listUserFragmentBlack"
+            app:popUpTo="@id/listUserFragmentBlack"
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
-        android:id="@+id/updateFragment"
-        android:name="space.mel.tutorschedule.fragments.user.updateUser.UpdateUserFragment"
+        android:id="@+id/updateUserFragment"
+        android:name="space.mel.tutorschedule.fragments.user.UpdateUserFragment"
         android:label="Update"
-        tools:layout="@layout/update_fragment_black">
+        tools:layout="@layout/update_user_fragment_black">
 
         <action
             android:id="@+id/action_updateFragment_to_userFullInformation"
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/userFullInformation"
-        android:name="space.mel.tutorschedule.fragments.user.userFullInformation.UserFullInformation"
+        android:name="space.mel.tutorschedule.fragments.user.UserFullInformation"
         android:label="UserFullInformation"
         tools:layout="@layout/user_full_information_fragment_black">
         <action
@@ -52,21 +52,49 @@
             app:destination="@id/addLesson" />
         <action
             android:id="@+id/action_userFullInformation_to_updateFragment"
-            app:destination="@id/updateFragment" />
+            app:destination="@id/updateUserFragment" />
         <action
             android:id="@+id/action_userFullInformation_to_listFragmentBlack"
-            app:destination="@id/listFragmentBlack"
-            app:popUpTo="@id/listFragmentBlack"
+            app:destination="@id/listUserFragmentBlack"
+            app:popUpTo="@id/listUserFragmentBlack"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_userFullInformation_to_listLessonFragment"
+            app:destination="@id/listLessonFragment" />
     </fragment>
     <fragment
         android:id="@+id/addLesson"
-        android:name="space.mel.tutorschedule.fragments.lesson.addLesson.AddLessonFragment"
+        android:name="space.mel.tutorschedule.fragments.lesson.AddLessonFragment"
         android:label="addLesson"
         tools:layout="@layout/add_lesson_fragment_black">
         <action
             android:id="@+id/action_addLesson_to_userFullInformation"
-            app:destination="@id/userFullInformation" />
+            app:destination="@id/userFullInformation"
+            app:popUpTo="@id/userFullInformation"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/listLessonFragment"
+        android:name="space.mel.tutorschedule.fragments.lesson.ListLessonFragment"
+        android:label="ListLessonFragment"
+        tools:layout="@layout/list_lesson_fragment_black">
+        <action
+            android:id="@+id/action_listLessonFragment_to_lessonFullInformation"
+            app:destination="@id/lessonFullInformation" />
+        <action
+            android:id="@+id/action_listLessonFragment_to_userFullInformation"
+            app:destination="@id/userFullInformation"
+            app:popUpTo="@id/userFullInformation"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/lessonFullInformation"
+        android:name="space.mel.tutorschedule.fragments.lesson.LessonFullInformation"
+        android:label="LessonFullInformation"
+        tools:layout="@layout/lesson_full_information_fragment_black">
+        <action
+            android:id="@+id/action_lessonFullInformation_to_listLessonFragment"
+            app:destination="@id/listLessonFragment" />
     </fragment>
 
 </navigation>

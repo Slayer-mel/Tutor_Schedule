@@ -1,4 +1,4 @@
-package space.mel.tutorschedule.fragments.user.addUser
+package space.mel.tutorschedule.fragments.user
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import space.mel.tutorschedule.R
-import space.mel.tutorschedule.databinding.AddFragmentBlackBinding
+import space.mel.tutorschedule.databinding.AddUserFragmentBlackBinding
 import space.mel.tutorschedule.model.User
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
 class AddUserFragment : Fragment() {
-    private var _binding: AddFragmentBlackBinding? = null
+    private var _binding: AddUserFragmentBlackBinding? = null
     private val binding get() = _binding!!
     //private val userViewModel by viewModel<UserViewModel>()
     private val userViewModel by activityViewModel<UserViewModel>()
@@ -23,7 +23,7 @@ class AddUserFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AddFragmentBlackBinding.inflate(layoutInflater)
+        _binding = AddUserFragmentBlackBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -49,6 +49,7 @@ class AddUserFragment : Fragment() {
         findNavController().navigate(R.id.action_addFragment_to_listFragmentBlack)
     }
 
+    //saveData
     private fun insertDataToDatabase() {
         val name = binding.edtAddName.text.toString()
         val grade = binding.edtAddGrade.text
@@ -65,7 +66,7 @@ class AddUserFragment : Fragment() {
             // Add Data to Database
             userViewModel.addUser(user)
             Toast.makeText(requireContext(), "Ученик добавлен", Toast.LENGTH_LONG).show()
-            // Navigate Back
+            // View
             findNavController().navigate(R.id.action_addFragment_to_listFragmentBlack)
         }
     }

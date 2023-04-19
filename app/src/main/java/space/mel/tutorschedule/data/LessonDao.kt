@@ -1,6 +1,7 @@
 package space.mel.tutorschedule.data
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 import space.mel.tutorschedule.model.Lesson
 import space.mel.tutorschedule.model.relations.UserWithLessons
 
@@ -15,4 +16,7 @@ interface LessonDao {
     @Transaction
     @Query("SELECT * FROM user_table WHERE id= :id")
     suspend fun getUserWithLessons(id: String): List<UserWithLessons>
+
+    @Query("SELECT * FROM Lesson")
+    fun getLesson() : Flow<List<Lesson>>
 }

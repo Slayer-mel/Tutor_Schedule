@@ -13,17 +13,25 @@ class UserViewModel(
     private val repository: UserRepository,
 ) : ViewModel() {
 
-
     val currentUserEditable : MutableLiveData<User> = MutableLiveData()
+    val currentLessonEditable : MutableLiveData<Lesson> = MutableLiveData()
 
     fun setCurrentUserEditable (user: User){
         currentUserEditable.value = user
     }
 
+    fun setCurrentLessonEditable (lesson: Lesson){
+        currentLessonEditable.value = lesson
+    }
+
     val users = repository.getUser().asLiveData()
+    val lessons = repository.getLesson().asLiveData()
 
     private val userEventChannel = Channel<UserEvent>()
     val userEvent = userEventChannel.receiveAsFlow()
+
+    private val lessonEventChannel = Channel<LessonEvent>()
+    val lessonEvent = lessonEventChannel.receiveAsFlow()
 
 
     fun addLesson(lesson: Lesson){
@@ -32,10 +40,9 @@ class UserViewModel(
         }
     }
 
-    fun deleteLesson(lesson: Lesson){
-        viewModelScope.launch(Dispatchers.IO){
-            repository.deleteLesson(lesson)
-        }
+    suspend fun deleteLesson(lesson: Lesson){
+        repository.deleteLesson(lesson)
+        lessonEventChannel.send(LessonEvent.ShowUndoDeleteLessonMessage(lesson))
     }
 
     fun addUser(user: User) {
@@ -67,5 +74,8 @@ class UserViewModel(
 
     sealed class UserEvent{
         data class ShowUndoDeleteUserMessage(val user: User) : UserEvent()
+    }
+    sealed class LessonEvent{
+        data class ShowUndoDeleteLessonMessage(val lesson: Lesson) : LessonEvent()
     }
 }

@@ -19,7 +19,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/gilroy_medium"
-        android:text="@string/update_fragment_btn_back"
+        android:text="@string/update_user_fragment_btn_back"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -70,7 +70,7 @@
         android:layout_marginTop="12dp"
         android:padding="12dp"
         android:inputType="phone"
-        android:hint="@string/update_fragment_mobile_hint"
+        android:hint="@string/update_user_fragment_mobile_hint"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:fontFamily="@font/gilroy_medium"/>
@@ -86,7 +86,7 @@
         android:layout_marginTop="12dp"
         android:padding="12dp"
         android:inputType="text"
-        android:hint="@string/update_fragment_telegram_hint"
+        android:hint="@string/update_user_fragment_telegram_hint"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:fontFamily="@font/gilroy_medium"/>
@@ -102,7 +102,7 @@
         android:layout_marginTop="12dp"
         android:padding="12dp"
         android:inputType="text"
-        android:hint="@string/update_fragment_mom_or_dad_hint"
+        android:hint="@string/update_user_fragment_mom_or_dad_hint"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:fontFamily="@font/gilroy_medium"/>
@@ -118,7 +118,7 @@
         android:layout_marginTop="12dp"
         android:padding="12dp"
         android:inputType="textCapSentences"
-        android:hint="@string/update_fragment_mom_or_dad_name_hint"
+        android:hint="@string/update_user_fragment_mom_or_dad_name_hint"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:fontFamily="@font/gilroy_medium"/>
@@ -134,7 +134,7 @@
         android:layout_marginTop="12dp"
         android:padding="12dp"
         android:inputType="phone"
-        android:hint="@string/update_fragment_mobile_hint"
+        android:hint="@string/update_user_fragment_mobile_hint"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:fontFamily="@font/gilroy_medium"/>
@@ -150,7 +150,7 @@
         android:layout_marginTop="12dp"
         android:padding="12dp"
         android:inputType="text"
-        android:hint="@string/update_fragment_telegram_hint"
+        android:hint="@string/update_user_fragment_telegram_hint"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:fontFamily="@font/gilroy_medium"/>

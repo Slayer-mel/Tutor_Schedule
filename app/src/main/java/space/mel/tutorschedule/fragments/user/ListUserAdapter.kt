@@ -1,17 +1,17 @@
-package space.mel.tutorschedule.fragments.user.listUser
+package space.mel.tutorschedule.fragments.user
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import space.mel.tutorschedule.databinding.CustomRowBlackBinding
+import space.mel.tutorschedule.databinding.RvUserItemBlackBinding
 import space.mel.tutorschedule.model.User
 
 class ListUserAdapter(val onClick: (User) -> Unit) :
     ListAdapter<User, ListUserAdapter.UserViewHolder>(DiffCallback()) {
 
-    inner class UserViewHolder(private val binding: CustomRowBlackBinding) :
+    inner class UserViewHolder(private val binding: RvUserItemBlackBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
             binding.apply {
@@ -27,7 +27,7 @@ class ListUserAdapter(val onClick: (User) -> Unit) :
     //создает recyclerView Holder и инициализирует views для списка
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(
-            CustomRowBlackBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RvUserItemBlackBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

@@ -1,6 +1,5 @@
-package space.mel.tutorschedule.fragments.lesson.addLesson
+package space.mel.tutorschedule.fragments.lesson
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
@@ -23,9 +22,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.AddLessonFragmentBlackBinding
 import space.mel.tutorschedule.model.Lesson
+import space.mel.tutorschedule.utils.DateTimeHelper
 import space.mel.tutorschedule.viewmodel.AddLessonViewModel
 import space.mel.tutorschedule.viewmodel.UserViewModel
-import java.text.SimpleDateFormat
 
 class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private var _binding: AddLessonFragmentBlackBinding? = null
@@ -84,7 +83,11 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
                                 CalendarContract.EXTRA_EVENT_BEGIN_TIME + 60*60*1000)
                         startActivity(intent)
                         val lesson= Lesson(
-                            dataOfLesson = currentLessonTimeAndData
+                            dataOfLesson = currentLessonTimeAndData,
+                            userId = userViewModel.currentUserEditable.value?.let { user ->
+                                listOf(
+                                    user.id)
+                            }
                         )
                         userViewModel.addLesson(lesson)
                     }else {
@@ -111,8 +114,8 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
         }
         userViewModel.currentUserEditable.observe(viewLifecycleOwner){user->
             with(binding){
-                val g = getString(R.string.common_grade)
-                tvUserInfo.text = "${user.name+ "  " + user.grade+ " " + g}"
+                val grade = getString(R.string.common_grade)
+                tvUserInfo.text = "${user.name+ "  " + user.grade+ " " + grade}"
                 btnBack.text = user.name
             }
         }
@@ -146,13 +149,19 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
     }
 
     private fun displayFormattedDate(timestamp: Long){
+        val dayOfWeek = DateTimeHelper.getDayOfWeek(timestamp, true)
+        val dayMonthYear = DateTimeHelper.getDayMonthYear(timestamp)
+        val time = DateTimeHelper.getTimeHoursMinutes(timestamp)
         val at = getString(R.string.add_lesson_fragment_tv_at)
-        val datePattern = getString(R.string.add_lesson_fragment_tv_formatter, at)
-        @SuppressLint("SimpleDateFormat")
-        val formatter = SimpleDateFormat(datePattern)
-        val fullDateOfLesson = formatter.format(timestamp)
+        val fullDateOfLesson = getString(
+            R.string.add_lesson_fragment_tv_formatter,
+            dayOfWeek,
+            dayMonthYear,
+            at,
+            time
+        )
         addLessonViewModel.setDateAndTime(fullDateOfLesson)
-        currentLessonTimeAndData = formatter.parse(fullDateOfLesson)?.time
+        currentLessonTimeAndData = timestamp
     }
 
     override fun onDestroy() {

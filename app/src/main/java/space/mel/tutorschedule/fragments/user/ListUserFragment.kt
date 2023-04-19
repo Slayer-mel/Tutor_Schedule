@@ -1,4 +1,4 @@
-package space.mel.tutorschedule.fragments.user.listUser
+package space.mel.tutorschedule.fragments.user
 
 import android.graphics.Color
 import android.os.Bundle
@@ -16,12 +16,12 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import space.mel.tutorschedule.R
-import space.mel.tutorschedule.databinding.ListFragmentBlackBinding
+import space.mel.tutorschedule.databinding.ListUserFragmentBlackBinding
 import space.mel.tutorschedule.model.User
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
 class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
-    private var _binding: ListFragmentBlackBinding? = null
+    private var _binding: ListUserFragmentBlackBinding? = null
     private val binding get() = _binding!!
 
     //private val userViewModel : UserViewModel by activityViewModels()
@@ -34,7 +34,7 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = ListFragmentBlackBinding.inflate(layoutInflater)
+        _binding = ListUserFragmentBlackBinding.inflate(layoutInflater)
 
         // Recyclerview
         binding.apply {
@@ -63,7 +63,6 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
                     }
                 }
             }).attachToRecyclerView(recyclerview)
-
         }
 
         // UserViewModel

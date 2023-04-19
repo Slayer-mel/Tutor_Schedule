@@ -44,5 +44,5 @@ class UserRepository(
     }
 
     fun getUser(): Flow<List<User>> = userDao.getUser()
-
+    fun getLesson(): Flow<List<Lesson>> = lessonDao.getLesson()
 }
