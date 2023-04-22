@@ -33,7 +33,6 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
     private val addLessonViewModel by viewModel<AddLessonViewModel>()
     @RequiresApi(Build.VERSION_CODES.N)
     private val calendar = Calendar.getInstance()
-    private var currentLessonTimeAndData: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,18 +71,19 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
         with(binding){
             //add Lesson to Calendar
                 btnOk.setOnClickListener{
+                    val currentLessonTimeAndDate = addLessonViewModel.currentLessonTimeAndDateLiveData.value
                     if (btnChooseLessonDateAndTime.text.isNotEmpty()){
                         val title = userViewModel.currentUserEditable.value?.name
                         val intent  = Intent(Intent.ACTION_INSERT)
                             .setData(CalendarContract.Events.CONTENT_URI)
                             .putExtra(CalendarContract.Events.TITLE, title)
-                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, currentLessonTimeAndData)
+                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, currentLessonTimeAndDate)
                             .putExtra(
                                 CalendarContract.EXTRA_EVENT_END_TIME,
                                 CalendarContract.EXTRA_EVENT_BEGIN_TIME + 60*60*1000)
                         startActivity(intent)
                         val lesson= Lesson(
-                            dataOfLesson = currentLessonTimeAndData,
+                            dataOfLesson = currentLessonTimeAndDate,
                             userId = userViewModel.currentUserEditable.value?.let { user ->
                                 listOf(
                                     user.id)
@@ -111,6 +111,9 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
         addLessonViewModel.dateAndTime.observe(viewLifecycleOwner){ dataAndTime->
             binding.btnChooseLessonDateAndTime.text = dataAndTime
             Log.d("displayFormattedDate", dataAndTime)
+        }
+        addLessonViewModel.currentLessonTimeAndDateLiveData.observe(viewLifecycleOwner){date->
+            displayFormattedDate(date)
         }
         userViewModel.currentUserEditable.observe(viewLifecycleOwner){user->
             with(binding){
@@ -145,7 +148,7 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
             set(Calendar.HOUR_OF_DAY, hourOfDay)
             set(Calendar.MINUTE, minute)
         }
-        displayFormattedDate(calendar.timeInMillis)
+        addLessonViewModel.onDateAndTimeSetChanges(calendar.timeInMillis)
     }
 
     private fun displayFormattedDate(timestamp: Long){
@@ -161,7 +164,6 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
             time
         )
         addLessonViewModel.setDateAndTime(fullDateOfLesson)
-        currentLessonTimeAndData = timestamp
     }
 
     override fun onDestroy() {

@@ -21,6 +21,7 @@ class ListLessonAdapter(val onClick: (Lesson) -> Unit) :
                 val simpleDateFormat = SimpleDateFormat("EEEE, dd.MM.yyyy \n HH:mm ")
                 val dateString = simpleDateFormat.format(lesson.dataOfLesson)
                 tvLessonDate.text = dateString.capitalize()
+
                 root.setOnClickListener {
                     onClick.invoke(lesson)
                 }

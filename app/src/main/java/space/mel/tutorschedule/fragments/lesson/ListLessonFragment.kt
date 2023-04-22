@@ -10,13 +10,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.ListLessonFragmentBlackBinding
 import space.mel.tutorschedule.model.Lesson
+import space.mel.tutorschedule.utils.SwipeHelper
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
 class ListLessonFragment : Fragment() {
@@ -55,25 +55,14 @@ class ListLessonFragment : Fragment() {
                 setHasFixedSize(true)
             }
             //swipe delete item from Room DB
-            ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
-                0,
-                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-            ) {
-                override fun onMove(
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder,
-                    target: RecyclerView.ViewHolder
-                ): Boolean {
-                    return false
-                }
-
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val lesson = listLessonAdapter.currentList[viewHolder.adapterPosition]
+            ItemTouchHelper(
+                SwipeHelper{ viewHolderAdapterPosition->
+                    val lesson = listLessonAdapter.currentList[viewHolderAdapterPosition]
                     lifecycleScope.launch {
                         userViewModel.deleteLesson(lesson)
                     }
                 }
-            }).attachToRecyclerView(recyclerview)
+            ).attachToRecyclerView(recyclerview)
         }
 
         // UserViewModel
