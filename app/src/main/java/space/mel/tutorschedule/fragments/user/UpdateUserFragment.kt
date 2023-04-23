@@ -18,7 +18,6 @@ class UpdateUserFragment : Fragment() {
     private var _binding: UpdateUserFragmentBlackBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModel<UserViewModel>()
-    //private val userViewModel : UserViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -47,7 +46,6 @@ class UpdateUserFragment : Fragment() {
                 goBack()
             }
         }
-
     }
 
     private fun goBack() {

@@ -67,6 +67,7 @@
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/custom_row.xml" value="0.33" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/custom_row_black.xml" value="0.25" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/delete_alert_dialog.xml" value="0.33" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/delete_lesson_alert_dialog.xml" value="0.33" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/fragment_add.xml" value="0.17" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/fragment_list.xml" value="0.1" />
@@ -74,7 +75,7 @@
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/fragment_pupils_list.xml" value="0.25" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/fragment_splash.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/home_fragment.xml" value="0.16485507246376813" />
-        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/lesson_full_information_fragment_black.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/lesson_full_information_fragment_black.xml" value="0.2" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/list_fragment.xml" value="0.22" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/list_fragment_black.xml" value="0.33" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/list_item.xml" value="0.33" />
@@ -90,6 +91,7 @@
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/set_data_and_time2.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/update_fragment.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/update_fragment_black.xml" value="0.25" />
+        <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/update_lesson_fragment_black.xml" value="0.2" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/update_user_fragment_black.xml" value="0.2" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/user_full_information_fragment.xml" value="0.22" />
         <entry key="..\:/Users/Tom/AndroidStudioProjects/Tutorschedule/app/src/main/res/layout/user_full_information_fragment_black.xml" value="0.33" />

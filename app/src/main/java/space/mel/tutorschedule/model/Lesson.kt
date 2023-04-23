@@ -13,6 +13,7 @@ import kotlinx.parcelize.Parcelize
 data class Lesson(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
+    val topic: String? = null,
     val mark: Int? = null,
     val dataOfLesson: Long? = null,
     val homeWork: String? = null,

@@ -7,6 +7,8 @@
     <!--common Strings -->
     <string name="common_btn_cancel_gray_background">Отмена</string>
     <string name="common_btn_save_blue_background">Сохранить</string>
+    <string name="common_delete_user">Удалить ученика</string>
+    <string name="common_delete_lesson">Удалить урок</string>
     <string name="common_tv_name">Имя</string>
     <string name="common_grade">Класс</string>
 
@@ -36,7 +38,6 @@
     <string name="user_full_information_fragment_btn_edit">Редактировать</string>
     <string name="user_full_information_fragment_btn_telegram_write_message">Написать в Telegram</string>
     <string name="user_full_information_fragment_btn_make_lesson">Назначить занятие</string>
-    <string name="user_full_information_fragment_btn_delete_user">Удалить ученика</string>
 
     <!--Strings for AddLessonFragment-->
     <string name="add_lesson_fragment_tv_at">в</string>
@@ -50,4 +51,12 @@
     <!--Strings for ListLessonFragment-->
     <string name="list_lesson_fragment_btn_back">Уроки</string>
 
+    <!--Strings for UpdateLessonFragment-->
+    <string name="update_lesson_fragment_btn_back">Урок</string>
+
+    <!--Strings for DeleteUserAlertDialogs-->
+    <string name="delete_user_alert_dialog_tv_delete_message_text">Вы точно хотите удалеть этого ученика?</string>
+
+    <!--Strings for DeleteLessonAlertDialogs-->
+    <string name="delete_lesson_alert_dialog_tv_delete_message_text">Вы точно хотите удалеть этот урок?</string>
 </resources>

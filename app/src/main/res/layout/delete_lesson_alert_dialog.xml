@@ -29,7 +29,7 @@
         android:gravity="top"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
-        android:text="Удалить ученика"
+        android:text="@string/common_delete_lesson"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:fontFamily="@font/gilroy_medium"/>
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="@id/tvDeleteTitleText"
         app:layout_constraintTop_toBottomOf="@id/tvDeleteTitleText"
         android:layout_marginTop="24dp"
-        android:text="Вы точно хотите удалеть этого ученика?"
+        android:text="@string/delete_lesson_alert_dialog_tv_delete_message_text"
         android:textSize="14sp"
         android:textColor="@color/white"
         android:fontFamily="@font/gilroy_regular"/>
@@ -58,7 +58,7 @@
         android:fontFamily="@font/gilroy_medium"
         android:gravity="center"
         android:padding="18dp"
-        android:text="Отмена"
+        android:text="@string/common_btn_cancel_gray_background"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/btnDelete"
@@ -77,7 +77,7 @@
         android:layout_marginTop="12dp"
         android:padding="18dp"
         android:gravity="center"
-        android:text="Удалить"
+        android:text="@string/common_btn_cancel_gray_background"
         android:textColor="@color/red"
         android:textSize="16sp"
         android:fontFamily="@font/gilroy_medium"/>

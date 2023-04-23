@@ -85,8 +85,7 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
                         val lesson= Lesson(
                             dataOfLesson = currentLessonTimeAndDate,
                             userId = userViewModel.currentUserEditable.value?.let { user ->
-                                listOf(
-                                    user.id)
+                                listOf(user.id)
                             }
                         )
                         userViewModel.addLesson(lesson)

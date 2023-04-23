@@ -15,7 +15,7 @@ import space.mel.tutorschedule.model.UserIdTypeConverter
         User::class,
         Lesson::class
                ],
-    version =6,
+    version =7,
     exportSchema = false
 )
 

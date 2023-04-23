@@ -94,7 +94,23 @@
         tools:layout="@layout/lesson_full_information_fragment_black">
         <action
             android:id="@+id/action_lessonFullInformation_to_listLessonFragment"
-            app:destination="@id/listLessonFragment" />
+            app:destination="@id/listLessonFragment"
+            app:popUpTo="@id/listLessonFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_lessonFullInformation_to_updateLessonFragment"
+            app:destination="@id/updateLessonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateLessonFragment"
+        android:name="space.mel.tutorschedule.fragments.lesson.UpdateLessonFragment"
+        android:label="UpdateLessonFragment"
+        tools:layout="@layout/lesson_full_information_fragment_black">
+        <action
+            android:id="@+id/action_updateLessonFragment_to_lessonFullInformation"
+            app:destination="@id/lessonFullInformation"
+            app:popUpTo="@id/lessonFullInformation"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>

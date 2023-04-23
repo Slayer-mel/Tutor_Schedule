@@ -2,7 +2,6 @@ package space.mel.tutorschedule.fragments.lesson
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,13 +42,13 @@ class LessonFullInformation : Fragment() {
             btnEditLesson.setOnClickListener {
                 if (lessonCurrent != null) {
                     userViewModel.setCurrentLessonEditable(lessonCurrent)
-                    findNavController().navigate(R.id.action_userFullInformation_to_updateFragment)
+                    findNavController().navigate(R.id.action_lessonFullInformation_to_updateLessonFragment)
                 }
             }
 
             btnDeleteLesson.setOnClickListener {
                 val builder = AlertDialog.Builder(requireContext()).create()
-                val view = View.inflate(requireContext(), R.layout.delete_alert_dialog, null)
+                val view = View.inflate(requireContext(), R.layout.delete_lesson_alert_dialog, null)
                 val btnCancel = view.findViewById<TextView>(R.id.btnCancel)
                 val btnDelete = view.findViewById<TextView>(R.id.btnDelete)
                 btnCancel.setOnClickListener {
@@ -89,7 +88,6 @@ class LessonFullInformation : Fragment() {
     private fun initObservers() {
         userViewModel.currentLessonEditable.observe(viewLifecycleOwner) {lesson->
             with(binding) {
-                Log.d("USERFULL", "user = $lesson")
                 /*tvName.text = user.name
                 tvGrade.text = user.grade.toString()+" класс"
                 btnMakeCall.text = user.phonePupilNumber*/

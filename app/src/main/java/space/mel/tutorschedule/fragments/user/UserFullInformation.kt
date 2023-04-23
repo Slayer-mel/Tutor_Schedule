@@ -86,7 +86,7 @@ class UserFullInformation : Fragment() {
             }
             btnDeleteUser.setOnClickListener {
                 val builder = AlertDialog.Builder(requireContext()).create()
-                val view = View.inflate(requireContext(), R.layout.delete_alert_dialog, null)
+                val view = View.inflate(requireContext(), R.layout.delete_user_alert_dialog, null)
                 val btnCancel = view.findViewById<TextView>(R.id.btnCancel)
                 val btnDelete = view.findViewById<TextView>(R.id.btnDelete)
                 btnCancel.setOnClickListener {
