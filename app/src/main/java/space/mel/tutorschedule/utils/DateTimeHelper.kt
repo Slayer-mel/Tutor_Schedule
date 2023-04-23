@@ -13,6 +13,7 @@ object DateTimeHelper {
     fun getDayOfWeek(millis: Long, isCapitalize: Boolean = false): String {
         return SimpleDateFormat(DAY_OF_WEEK).run {
             format(millis).apply {
+                //TODO: Поменяй capitalize на то, что оно советует
                 if (isCapitalize) {capitalize()}
             }
         }

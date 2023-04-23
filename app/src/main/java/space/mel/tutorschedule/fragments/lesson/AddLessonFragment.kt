@@ -26,11 +26,17 @@ import space.mel.tutorschedule.utils.DateTimeHelper
 import space.mel.tutorschedule.viewmodel.AddLessonViewModel
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
-class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener,
+    TimePickerDialog.OnTimeSetListener {
     private var _binding: AddLessonFragmentBlackBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModel<UserViewModel>()
     private val addLessonViewModel by viewModel<AddLessonViewModel>()
+
+    //TODO: У тебя в приложении стоит minSdk=21, но здесь ты хуяришь аннотацию @RequiresApi(N)
+    // То есть если ты запустишь приложения с API 22, оно у тебя тупо упадёт с ошибкой
+    // Либо увеличь minSdk, либо убери аннотацию и придумай как переделать это для более старых
+    // версий
     @RequiresApi(Build.VERSION_CODES.N)
     private val calendar = Calendar.getInstance()
 
@@ -44,11 +50,15 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
     }
 
 
+    //TODO: Та же хуйня. Как тебя это не смущает блэт?
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            binding.btnChooseLessonDateAndTime.setOnClickListener {
+        //TODO: В другую функцию, где ты сетаешь лисенеры
+        binding.btnChooseLessonDateAndTime.setOnClickListener {
             calendar.add(Calendar.DAY_OF_MONTH, 0)
-            val dialog=DatePickerDialog(
+            //TODO: Тебе не обязательно объявлять переменную. Можно создать
+            // экземпляр и сразу использовать какую-нибудь scope-fun
+            val dialog = DatePickerDialog(
                 requireContext(),
                 R.style.datePickerTheme,
                 this,
@@ -58,41 +68,45 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
             )
             //минимальная дата начала занятий с сегодняшнего дня
             //dialog.datePicker.minDate = calendar.timeInMillis
-                with(dialog){
-                    setCancelable(false)
-                    show()
-                }
+            with(dialog) {
+                setCancelable(false)
+                show()
+            }
         }
         initClickListeners()
         initObservers()
     }
 
     private fun initClickListeners() {
-        with(binding){
+        with(binding) {
             //add Lesson to Calendar
-                btnOk.setOnClickListener{
-                    val currentLessonTimeAndDate = addLessonViewModel.currentLessonTimeAndDateLiveData.value
-                    if (btnChooseLessonDateAndTime.text.isNotEmpty()){
-                        val title = userViewModel.currentUserEditable.value?.name
-                        val intent  = Intent(Intent.ACTION_INSERT)
-                            .setData(CalendarContract.Events.CONTENT_URI)
-                            .putExtra(CalendarContract.Events.TITLE, title)
-                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, currentLessonTimeAndDate)
-                            .putExtra(
-                                CalendarContract.EXTRA_EVENT_END_TIME,
-                                CalendarContract.EXTRA_EVENT_BEGIN_TIME + 60*60*1000)
-                        startActivity(intent)
-                        val lesson= Lesson(
-                            dataOfLesson = currentLessonTimeAndDate,
-                            userId = userViewModel.currentUserEditable.value?.let { user ->
-                                listOf(user.id)
-                            }
+            //TODO: очень много действий в одном блоке лисенера. Раскидай по функциям
+            btnOk.setOnClickListener {
+                val currentLessonTimeAndDate =
+                    addLessonViewModel.currentLessonTimeAndDateLiveData.value
+                if (btnChooseLessonDateAndTime.text.isNotEmpty()) {
+                    val title = userViewModel.currentUserEditable.value?.name
+                    val intent = Intent(Intent.ACTION_INSERT)
+                        .setData(CalendarContract.Events.CONTENT_URI)
+                        .putExtra(CalendarContract.Events.TITLE, title)
+                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, currentLessonTimeAndDate)
+                        .putExtra(
+                            CalendarContract.EXTRA_EVENT_END_TIME,
+                            CalendarContract.EXTRA_EVENT_BEGIN_TIME + 60 * 60 * 1000
                         )
-                        userViewModel.addLesson(lesson)
-                    }else {
-                        Toast.makeText(requireContext(), "Выбирите дату", Toast.LENGTH_SHORT).show()
-                    }
+                    startActivity(intent)
+                    val lesson = Lesson(
+                        dataOfLesson = currentLessonTimeAndDate,
+                        userId = userViewModel.currentUserEditable.value?.let { user ->
+                            listOf(user.id)
+                        }
+                    )
+                    userViewModel.addLesson(lesson)
+                } else {
+                    //TODO: Строку в ресурсы
+                    Toast.makeText(requireContext(), "Выбирите дату", Toast.LENGTH_SHORT).show()
                 }
+            }
             btnCancel.setOnClickListener {
                 goBack()
             }
@@ -103,21 +117,21 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
     }
 
     private fun goBack() {
-            findNavController().navigate(R.id.action_addLesson_to_userFullInformation)
+        findNavController().navigate(R.id.action_addLesson_to_userFullInformation)
     }
 
     private fun initObservers() {
-        addLessonViewModel.dateAndTime.observe(viewLifecycleOwner){ dataAndTime->
+        addLessonViewModel.dateAndTime.observe(viewLifecycleOwner) { dataAndTime ->
             binding.btnChooseLessonDateAndTime.text = dataAndTime
             Log.d("displayFormattedDate", dataAndTime)
         }
-        addLessonViewModel.currentLessonTimeAndDateLiveData.observe(viewLifecycleOwner){date->
+        addLessonViewModel.currentLessonTimeAndDateLiveData.observe(viewLifecycleOwner) { date ->
             displayFormattedDate(date)
         }
-        userViewModel.currentUserEditable.observe(viewLifecycleOwner){user->
-            with(binding){
+        userViewModel.currentUserEditable.observe(viewLifecycleOwner) { user ->
+            with(binding) {
                 val grade = getString(R.string.common_grade)
-                tvUserInfo.text = "${user.name+ "  " + user.grade+ " " + grade}"
+                tvUserInfo.text = "${user.name + "  " + user.grade + " " + grade}"
                 btnBack.text = user.name
             }
         }
@@ -127,6 +141,7 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         calendar.set(year, month, dayOfMonth)
+        //TODO: то же самое. Можно использовать scope fun без создания переменной
         val timePicker = TimePickerDialog(
             requireContext(),
             R.style.timePickerTheme,
@@ -135,7 +150,7 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
             calendar.get(Calendar.MINUTE),
             true
         )
-        with(timePicker){
+        with(timePicker) {
             setCancelable(false)
             show()
         }
@@ -150,7 +165,7 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
         addLessonViewModel.onDateAndTimeSetChanges(calendar.timeInMillis)
     }
 
-    private fun displayFormattedDate(timestamp: Long){
+    private fun displayFormattedDate(timestamp: Long) {
         val dayOfWeek = DateTimeHelper.getDayOfWeek(timestamp, true)
         val dayMonthYear = DateTimeHelper.getDayMonthYear(timestamp)
         val time = DateTimeHelper.getTimeHoursMinutes(timestamp)
@@ -167,6 +182,6 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding=null
+        _binding = null
     }
 }

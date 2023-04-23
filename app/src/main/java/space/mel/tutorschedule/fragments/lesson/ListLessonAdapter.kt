@@ -15,11 +15,15 @@ class ListLessonAdapter(val onClick: (Lesson) -> Unit) :
 
     inner class LessonViewHolder(private val binding: RvLessonItemBlackBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        //TODO: Зачастую, оно просит поставить аннотацию "SuppressLint" когда ты
+        // используешь устаревший код. Сначала посмотри что оно тебе советует
+        // и попробуй сделать нормально. Конкретно тут МОЖНО сделать нормально.
         @SuppressLint("SimpleDateFormat")
         fun bind(lesson: Lesson) {
             binding.apply {
                 val simpleDateFormat = SimpleDateFormat("EEEE, dd.MM.yyyy \n HH:mm ")
                 val dateString = simpleDateFormat.format(lesson.dataOfLesson)
+                //TODO: Ты ж видишь код зачёркнут. Это значит, он устаревший. Сделай так как оно советует.
                 tvLessonDate.text = dateString.capitalize()
 
                 root.setOnClickListener {

@@ -27,6 +27,7 @@ class UserViewModel(
     val users = repository.getUser().asLiveData()
     val lessons = repository.getLesson().asLiveData()
 
+    //TODO: Разберись почему здесь нужен именно Channel и потом расскажешь.
     private val userEventChannel = Channel<UserEvent>()
     val userEvent = userEventChannel.receiveAsFlow()
 
@@ -72,9 +73,12 @@ class UserViewModel(
         return repository.searchDatabase(searchQuery).asLiveData()
     }
 
+    //TODO: Зачем тут sealed class?
     sealed class UserEvent{
         data class ShowUndoDeleteUserMessage(val user: User) : UserEvent()
     }
+
+    //TODO: Зачем тут sealed class?
     sealed class LessonEvent{
         data class ShowUndoDeleteLessonMessage(val lesson: Lesson) : LessonEvent()
     }

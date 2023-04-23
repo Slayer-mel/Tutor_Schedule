@@ -66,6 +66,7 @@ class ListLessonFragment : Fragment() {
         }
 
         // UserViewModel
+        //TODO: Какого хуя это делает в функции "initAdapter"?
         userViewModel.lessons.observe(viewLifecycleOwner) { lessonList ->
             val userId = userViewModel.currentUserEditable.value!!.id
 
@@ -76,18 +77,24 @@ class ListLessonFragment : Fragment() {
             listLessonAdapter.submitList(sortedListOfLesson)
         }
 
+        //TODO: Какого хуя это делает в функции "initAdapter"?
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             userViewModel.lessonEvent.collect { event ->
+                //TODO: Тебе не нужен when, если у тебя всего одно условие. Используй if
                 when (event) {
                     is UserViewModel.LessonEvent.ShowUndoDeleteLessonMessage -> {
                         Snackbar.make(
                             requireView(),
+                            //TODO: В строковые ресурсы
                             "Урок удалён",
                             Snackbar.LENGTH_INDEFINITE
                         )
+                            //TODO: В строковые ресурсы
                             .setAction("Отмена") {
                                 userViewModel.addLesson(event.lesson)
                             }
+                            //TODO: Стилистическая ошибка, которая называется "Magic number".
+                            // Вынеси эту цифру в константу и назови нормально
                             .setDuration(4500)
                             .setActionTextColor(Color.RED)
                             .show()

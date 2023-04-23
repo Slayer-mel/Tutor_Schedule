@@ -16,11 +16,11 @@ import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.LessonFullInformationFragmentBlackBinding
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
+//TODO: Добавь в название окончание "Fragment"
 class LessonFullInformation : Fragment() {
     private var _binding: LessonFullInformationFragmentBlackBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModel<UserViewModel>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,12 +40,15 @@ class LessonFullInformation : Fragment() {
         val lessonCurrent = userViewModel.currentLessonEditable.value
         with(binding) {
             btnEditLesson.setOnClickListener {
+                //TODO: lessonCurrent?.let
                 if (lessonCurrent != null) {
                     userViewModel.setCurrentLessonEditable(lessonCurrent)
                     findNavController().navigate(R.id.action_lessonFullInformation_to_updateLessonFragment)
                 }
             }
 
+            //TODO: Слишком дохуя действий в одном блоке. Раскидай по функциям.
+            // AlertDialog я бы вообще в отдельный класс вынес
             btnDeleteLesson.setOnClickListener {
                 val builder = AlertDialog.Builder(requireContext()).create()
                 val view = View.inflate(requireContext(), R.layout.delete_lesson_alert_dialog, null)
@@ -56,6 +59,7 @@ class LessonFullInformation : Fragment() {
                 }
                 btnDelete.setOnClickListener {
                     Toast.makeText(
+                        //TODO: Строку в ресурсы
                         requireContext(), "Урок удален",
                         Toast.LENGTH_LONG
                     ).show()

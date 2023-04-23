@@ -19,8 +19,6 @@ class UserRepository(
         lessonDao.deleteLesson(lesson)
     }
 
-
-
     suspend fun readAllData(): List<User> = userDao.readAllData()
 
     suspend fun addUser(user: User) {

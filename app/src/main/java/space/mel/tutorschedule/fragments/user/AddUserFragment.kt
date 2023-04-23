@@ -55,6 +55,7 @@ class AddUserFragment : Fragment() {
         val grade = binding.edtAddGrade.text
 
         if (name.isEmpty() ||  grade.isNullOrEmpty()) {
+            //TODO: В строковые ресурсы
             Toast.makeText(requireContext(), "Заполните Имя и класс", Toast.LENGTH_LONG)
                 .show()
         } else {
@@ -65,6 +66,7 @@ class AddUserFragment : Fragment() {
             )
             // Add Data to Database
             userViewModel.addUser(user)
+            //TODO: В строковые ресурсы
             Toast.makeText(requireContext(), "Ученик добавлен", Toast.LENGTH_LONG).show()
             // View
             findNavController().navigate(R.id.action_addFragment_to_listFragmentBlack)

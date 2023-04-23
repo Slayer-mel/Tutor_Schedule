@@ -20,6 +20,7 @@ import space.mel.tutorschedule.model.User
 import space.mel.tutorschedule.utils.SwipeHelper
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
+//TODO: Не наследуй фрагмент от SearchView.OnQueryTextListener. Создай отдельный класс
 class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
     private var _binding: ListUserFragmentBlackBinding? = null
     private val binding get() = _binding!!
@@ -36,6 +37,8 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
     ): View {
         _binding = ListUserFragmentBlackBinding.inflate(layoutInflater)
 
+        //TODO: Какого хрена это всё делает в OnCreateView? Перемести в onViewCreated
+        // и разнеси по функциям. У тебя тут и сетап recyclerView, и observe, и collect
         // Recyclerview
         binding.apply {
             recyclerview.apply {
@@ -65,12 +68,15 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
                     is UserViewModel.UserEvent.ShowUndoDeleteUserMessage -> {
                         Snackbar.make(
                             requireView(),
+                            //TODO: В строковые ресурсы
                             "Ученик удалён",
                             Snackbar.LENGTH_INDEFINITE
                         )
+                            //TODO: В строковые ресурсы
                             .setAction("Отмена") {
                                 userViewModel.addUser(event.user)
                             }
+                            //TODO: Magic number
                             .setDuration(4500)
                             .setActionTextColor(Color.RED)
                             .show()
@@ -103,6 +109,7 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun searchDatabase(query: String) {
+        //TODO: Нахрена тебе знаки процента в запросе?
         val searchQuery = "%$query%"
         userViewModel.searchDatabase(searchQuery).observe(this) { list ->
             list.let { listOfUser ->

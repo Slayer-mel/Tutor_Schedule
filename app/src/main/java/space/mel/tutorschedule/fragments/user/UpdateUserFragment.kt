@@ -100,9 +100,11 @@ class UpdateUserFragment : Fragment() {
                 updateUser(updatedUser)
                 currentUserEditable.value = updatedUser
             }
+            //TODO: В строковые ресурсы
             Toast.makeText(requireContext(), "Данные изменены!", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_updateFragment_to_userFullInformation)
         } else {
+            //TODO: В строковые ресурсы
             Toast.makeText(requireContext(), "Заполните все данные", Toast.LENGTH_SHORT)
                 .show()
         }

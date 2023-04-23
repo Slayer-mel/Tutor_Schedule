@@ -15,6 +15,7 @@ import space.mel.tutorschedule.model.UserIdTypeConverter
         User::class,
         Lesson::class
                ],
+    //TODO: Нахрена тебе аж седьмая версия БД? У тебя ни одной миграции нет
     version =7,
     exportSchema = false
 )
@@ -29,6 +30,9 @@ abstract class UserDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun lessonDao(): LessonDao
 
+    //TODO: Я тебе ещё хуй знает когда говорил поменять логику создания
+    // и провайда экземпляра БД на Koin. В Koin у нас есть Singletone,
+    // который делает то же самое
     companion object {
         @Volatile
         private var INSTANCE: UserDatabase? = null
@@ -42,6 +46,7 @@ abstract class UserDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     UserDatabase::class.java,
+                    //TODO: Имя БД нужно хранить в константе
                     "user_database"
                 )
                     .fallbackToDestructiveMigration()

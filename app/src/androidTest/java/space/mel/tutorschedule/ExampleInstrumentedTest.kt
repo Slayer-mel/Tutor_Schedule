@@ -13,6 +13,7 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
+//TODO: Тебе вряд ли нужны инструменталные тесты. Удали модуль androidTest
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
     @Test

@@ -21,11 +21,13 @@ import space.mel.tutorschedule.databinding.UserFullInformationFragmentBlackBindi
 import space.mel.tutorschedule.viewmodel.UserFullInformationViewModel
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
+//TODO: В конце к имени добавь "Fragment"
 class UserFullInformation : Fragment() {
     private var _binding: UserFullInformationFragmentBlackBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModel<UserViewModel>()
     private val userFullInformationViewModel by viewModel<UserFullInformationViewModel>()
+    //TODO: Такие переменнные обычно хранятся в companion object как константа
     private val pickImage = 100
     private var imageUri: Uri? = null
 
@@ -45,6 +47,11 @@ class UserFullInformation : Fragment() {
 
 
     private fun initListeners() {
+        //TODO: Логически неверно объявлять переменную здесь. В данный момент ты сохраняешь
+        // юзера в переменную при вызове функции "initListeners". Далее лисенеры будут работать
+        // только с этой переменной. Если при каком-то сценарии юзер внутри currentUserEditable
+        // поменяется, лисенеры продолжат работать со старым юзером, который был сохранён в переменную
+        // userCurrent при вызове функции initListeners
         val userCurrent = userViewModel.currentUserEditable.value
         with(binding) {
             btnMakeLesson.setOnClickListener {
@@ -65,6 +72,7 @@ class UserFullInformation : Fragment() {
                 startActivityForResult(gallery, pickImage)
             }*/
 
+            //TODO: Много логики в одном блоке. Раскидай по функциям
             btnTelegramWriteMessage.setOnClickListener {
                 val telegramIntent = Intent(Intent.ACTION_VIEW)
                 //val userTelegramID = "https://t.me/+380669617935"
@@ -73,17 +81,21 @@ class UserFullInformation : Fragment() {
 
                 if (userTelegramID.isNullOrEmpty()) {
                     Toast.makeText(
+                        //TODO: В строковые ресурсы
                         requireContext(), "Добавьте имя пользователя из Telegram",
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
                     with(telegramIntent) {
+                        //TODO: В константу
                         data = Uri.parse("https://t.me/$userTelegramID")
+                        //TODO: В константу
                         setPackage("org.telegram.messenger")
                     }
                     startActivity(telegramIntent)
                 }
             }
+            //TODO: Много логики в одном блоке. Раскидай по функциям
             btnDeleteUser.setOnClickListener {
                 val builder = AlertDialog.Builder(requireContext()).create()
                 val view = View.inflate(requireContext(), R.layout.delete_user_alert_dialog, null)
@@ -94,6 +106,7 @@ class UserFullInformation : Fragment() {
                 }
                 btnDelete.setOnClickListener {
                     Toast.makeText(
+                        //TODO: В строковые ресурсы
                         requireContext(), "Ученик удален",
                         Toast.LENGTH_LONG
                     ).show()
@@ -114,6 +127,7 @@ class UserFullInformation : Fragment() {
                 val number = removeWhiteSpace(inputNumber.toString())
                 val callIntent = Intent(
                     Intent.ACTION_DIAL,
+                    //TODO: tel в константу
                     Uri.fromParts("tel", number, null)
                 )
                 startActivity(callIntent)
@@ -130,6 +144,10 @@ class UserFullInformation : Fragment() {
 
     private suspend fun deleteUser() {
         val user = userViewModel.currentUserEditable.value
+        //TODO: Логически неправильно, что ты сначала навигируешься, а потом удаляешь
+        // юзера. Удаление, к тому же, может быть неудачным. Тебе нужно показыавть состояние
+        // загрузки пока идёт удаление (это пара миллисекунд, но тем не менее это логически верно)
+        // и только после того, как удаление прошло удачно, выполнять остальную логику
         findNavController().navigate(R.id.action_userFullInformation_to_listFragmentBlack)
         user?.let { userViewModel.deleteUser(it) }
     }
@@ -140,6 +158,7 @@ class UserFullInformation : Fragment() {
             with(binding) {
                 Log.d("USERFULL", "user = $user")
                 tvName.text = user.name
+                //TODO: В строковые ресурсы
                 tvGrade.text = user.grade.toString()+" класс"
                 btnMakeCall.text = user.phonePupilNumber
             }
