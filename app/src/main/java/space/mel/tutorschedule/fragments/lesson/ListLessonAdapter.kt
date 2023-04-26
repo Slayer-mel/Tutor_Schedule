@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import space.mel.tutorschedule.databinding.RvLessonItemBlackBinding
 import space.mel.tutorschedule.model.Lesson
 import java.text.SimpleDateFormat
+import java.util.*
 
 class ListLessonAdapter(val onClick: (Lesson) -> Unit) :
     ListAdapter<Lesson, ListLessonAdapter.LessonViewHolder>(DiffCallback()) {
@@ -24,7 +25,7 @@ class ListLessonAdapter(val onClick: (Lesson) -> Unit) :
                 val simpleDateFormat = SimpleDateFormat("EEEE, dd.MM.yyyy \n HH:mm ")
                 val dateString = simpleDateFormat.format(lesson.dataOfLesson)
                 //TODO: Ты ж видишь код зачёркнут. Это значит, он устаревший. Сделай так как оно советует.
-                tvLessonDate.text = dateString.capitalize()
+                tvLessonDate.text = dateString.capitalize(Locale.ROOT)
 
                 root.setOnClickListener {
                     onClick.invoke(lesson)
