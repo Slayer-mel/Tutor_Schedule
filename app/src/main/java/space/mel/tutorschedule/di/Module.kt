@@ -4,10 +4,11 @@ import androidx.room.Room
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.GlobalContext.loadKoinModules
 import org.koin.dsl.module
-import space.mel.tutorschedule.data.DATABASE_NAME
 import space.mel.tutorschedule.data.UserDatabase
 import space.mel.tutorschedule.repository.UserRepository
+import space.mel.tutorschedule.utils.Constants.DATABASE_NAME
 import space.mel.tutorschedule.viewmodel.AddLessonViewModel
+import space.mel.tutorschedule.viewmodel.AddUserViewModel
 import space.mel.tutorschedule.viewmodel.UserFullInformationViewModel
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
@@ -37,4 +38,5 @@ val viewModelModule = module {
     viewModel { UserViewModel(get()) }
     viewModel { UserFullInformationViewModel() }
     viewModel { AddLessonViewModel() }
+    viewModel { AddUserViewModel() }
 }

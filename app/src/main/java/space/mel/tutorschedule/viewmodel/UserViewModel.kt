@@ -27,7 +27,7 @@ class UserViewModel(
     val users = repository.getUser().asLiveData()
     val lessons = repository.getLesson().asLiveData()
 
-    //TODO: Разберись почему здесь нужен именно Channel и потом расскажешь.
+    //TODO: Разберись почему здесь нужен именно Channel, а не LiveData / StateFlow и потом расскажешь.
     private val userEventChannel = Channel<UserEvent>()
     val userEvent = userEventChannel.receiveAsFlow()
 
@@ -41,9 +41,11 @@ class UserViewModel(
         }
     }
 
-    suspend fun deleteLesson(lesson: Lesson){
-        repository.deleteLesson(lesson)
-        lessonEventChannel.send(LessonEvent.ShowUndoDeleteLessonMessage(lesson))
+    fun deleteLesson(lesson: Lesson){
+        viewModelScope.launch {
+            repository.deleteLesson(lesson)
+            lessonEventChannel.send(LessonEvent.ShowUndoDeleteLessonMessage(lesson))
+        }
     }
 
     fun addUser(user: User) {
@@ -58,9 +60,10 @@ class UserViewModel(
         }
     }
 
-  suspend fun deleteUser(user: User) {
-            repository.deleteUser(user)
-            userEventChannel.send(UserEvent.ShowUndoDeleteUserMessage(user))
+  fun deleteUser(user: User) {
+            viewModelScope.launch { repository.deleteUser(user)
+                userEventChannel.send(UserEvent.ShowUndoDeleteUserMessage(user))
+            }
     }
 
     fun deleteAllUser() {

@@ -1,6 +1,5 @@
 package space.mel.tutorschedule.fragments.user
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,27 +7,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.UserFullInformationFragmentBlackBinding
+import space.mel.tutorschedule.utils.AlertDialogProvider
+import space.mel.tutorschedule.utils.Constants
 import space.mel.tutorschedule.viewmodel.UserFullInformationViewModel
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
-//TODO: В конце к имени добавь "Fragment"
-class UserFullInformation : Fragment() {
+class UserFullInformationFragment : Fragment() {
     private var _binding: UserFullInformationFragmentBlackBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModel<UserViewModel>()
     private val userFullInformationViewModel by viewModel<UserFullInformationViewModel>()
-    //TODO: Такие переменнные обычно хранятся в companion object как константа
-    private val pickImage = 100
+
     private var imageUri: Uri? = null
 
 
@@ -56,7 +52,7 @@ class UserFullInformation : Fragment() {
         with(binding) {
             btnMakeLesson.setOnClickListener {
                 if (userCurrent != null) {
-                   findNavController().navigate(R.id.action_userFullInformation_to_addLesson)
+                    findNavController().navigate(R.id.action_userFullInformation_to_addLesson)
                 }
             }
             btnEdit.setOnClickListener {
@@ -65,61 +61,44 @@ class UserFullInformation : Fragment() {
                     findNavController().navigate(R.id.action_userFullInformation_to_updateFragment)
                 }
             }
-           /* засетать фото
-           imgUser.setOnClickListener {
-                val gallery =
-                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-                startActivityForResult(gallery, pickImage)
-            }*/
+            /* засетать фото
+            imgUser.setOnClickListener {
+                 val gallery =
+                     Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+                 startActivityForResult(gallery, Constants.PICK_iMAGE)
+             }*/
 
             //TODO: Много логики в одном блоке. Раскидай по функциям
             btnTelegramWriteMessage.setOnClickListener {
                 val telegramIntent = Intent(Intent.ACTION_VIEW)
                 //val userTelegramID = "https://t.me/+380669617935"
                 //val userTelegramID = "https://t.me/Tetty_S"
-                val userTelegramID = userViewModel.currentUserEditable.value?.telegramPupilNumberOrId
+                val userTelegramID =
+                    userViewModel.currentUserEditable.value?.telegramPupilNumberOrId
 
                 if (userTelegramID.isNullOrEmpty()) {
                     Toast.makeText(
-                        //TODO: В строковые ресурсы
-                        requireContext(), "Добавьте имя пользователя из Telegram",
+                        requireContext(),
+                        R.string.user_full_information_fragment_add_name_toast,
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
                     with(telegramIntent) {
-                        //TODO: В константу
-                        data = Uri.parse("https://t.me/$userTelegramID")
-                        //TODO: В константу
-                        setPackage("org.telegram.messenger")
+                        data = Uri.parse("${Constants.TELEGRAM_HTTP}$userTelegramID")
+                        setPackage(Constants.TELEGRAM_PACKAGE)
                     }
                     startActivity(telegramIntent)
                 }
             }
-            //TODO: Много логики в одном блоке. Раскидай по функциям
             btnDeleteUser.setOnClickListener {
-                val builder = AlertDialog.Builder(requireContext()).create()
-                val view = View.inflate(requireContext(), R.layout.delete_user_alert_dialog, null)
-                val btnCancel = view.findViewById<TextView>(R.id.btnCancel)
-                val btnDelete = view.findViewById<TextView>(R.id.btnDelete)
-                btnCancel.setOnClickListener {
-                    builder.dismiss()
-                }
-                btnDelete.setOnClickListener {
-                    Toast.makeText(
-                        //TODO: В строковые ресурсы
-                        requireContext(), "Ученик удален",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    lifecycleScope.launch {
+                AlertDialogProvider.createAlertInstance(
+                    requireContext(),
+                    R.layout.delete_user_alert_dialog,
+                    onDelete = {
+                        showDeleteToast()
                         deleteUser()
                     }
-                    builder.dismiss()
-                }
-                with(builder) {
-                    setView(view)
-                    setCancelable(false)
-                    show()
-                }
+                ).show()
             }
 
             btnMakeCall.setOnClickListener {
@@ -127,8 +106,7 @@ class UserFullInformation : Fragment() {
                 val number = removeWhiteSpace(inputNumber.toString())
                 val callIntent = Intent(
                     Intent.ACTION_DIAL,
-                    //TODO: tel в константу
-                    Uri.fromParts("tel", number, null)
+                    Uri.fromParts(Constants.TEL, number, null)
                 )
                 startActivity(callIntent)
             }
@@ -142,24 +120,32 @@ class UserFullInformation : Fragment() {
         }
     }
 
-    private suspend fun deleteUser() {
+    private fun showDeleteToast() {
+        Toast.makeText(
+            requireContext(),
+            R.string.common_snack_bar_user_delete,
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    private fun deleteUser() {
         val user = userViewModel.currentUserEditable.value
         //TODO: Логически неправильно, что ты сначала навигируешься, а потом удаляешь
         // юзера. Удаление, к тому же, может быть неудачным. Тебе нужно показыавть состояние
         // загрузки пока идёт удаление (это пара миллисекунд, но тем не менее это логически верно)
         // и только после того, как удаление прошло удачно, выполнять остальную логику
-        findNavController().navigate(R.id.action_userFullInformation_to_listFragmentBlack)
         user?.let { userViewModel.deleteUser(it) }
+        findNavController().navigate(R.id.action_userFullInformation_to_listFragmentBlack)
     }
 
 
     private fun initObservers() {
-        userViewModel.currentUserEditable.observe(viewLifecycleOwner) {user->
+        userViewModel.currentUserEditable.observe(viewLifecycleOwner) { user ->
             with(binding) {
                 Log.d("USERFULL", "user = $user")
                 tvName.text = user.name
-                //TODO: В строковые ресурсы
-                tvGrade.text = user.grade.toString()+" класс"
+                tvGrade.text = "${user.grade} ${getString(R.string.common_grade_lowercase)}"
+                Log.d("LOGSLOGS", "${tvGrade.text}")
                 btnMakeCall.text = user.phonePupilNumber
             }
         }
@@ -172,13 +158,13 @@ class UserFullInformation : Fragment() {
     //https://www.tutorialspoint.com/how-to-pick-an-image-from-an-image-gallery-on-android-using-kotlin
     /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == pickImage) {
+        if (resultCode == RESULT_OK && requestCode == Constants.PICK_iMAGE) {
             imageUri = data?.data
             binding.imgUser.setImageURI(imageUri)
         }
     }*/
     override fun onDestroy() {
         super.onDestroy()
-        _binding=null
+        _binding = null
     }
 }

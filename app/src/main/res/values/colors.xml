@@ -23,5 +23,6 @@
     <color name="Bg">#171717</color>
     <color name="gray">#707070</color>
     <color name="c2c2c2c">#2C2C2C</color>
+    <color name="hint_text">#808080</color>
 
 </resources>

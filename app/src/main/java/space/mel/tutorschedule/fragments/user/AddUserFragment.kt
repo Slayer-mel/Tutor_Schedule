@@ -28,13 +28,13 @@ class AddUserFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initObservers()
+        initListeners()
     }
 
-    private fun initObservers() {
+    private fun initListeners() {
         with(binding){
             btnOk.setOnClickListener {
-                insertDataToDatabase()
+                    insertDataToDatabase()
             }
             btnCancel.setOnClickListener {
                 goBack()
@@ -55,7 +55,7 @@ class AddUserFragment : Fragment() {
         val grade = binding.edtAddGrade.text
 
         if (name.isEmpty() ||  grade.isNullOrEmpty()) {
-            //TODO: В строковые ресурсы
+            //TODO: В строковые ресурсы, добавить isEnable
             Toast.makeText(requireContext(), "Заполните Имя и класс", Toast.LENGTH_LONG)
                 .show()
         } else {
@@ -66,9 +66,10 @@ class AddUserFragment : Fragment() {
             )
             // Add Data to Database
             userViewModel.addUser(user)
-            //TODO: В строковые ресурсы
-            Toast.makeText(requireContext(), "Ученик добавлен", Toast.LENGTH_LONG).show()
-            // View
+            Toast.makeText(requireContext(),
+                R.string.common_snack_bar_user_added,
+                Toast.LENGTH_LONG).
+            show()
             findNavController().navigate(R.id.action_addFragment_to_listFragmentBlack)
         }
     }

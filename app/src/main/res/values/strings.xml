@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Расписание репетитора</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 
     <!--common Strings -->
@@ -9,8 +8,13 @@
     <string name="common_btn_save_blue_background">Сохранить</string>
     <string name="common_delete_user">Удалить ученика</string>
     <string name="common_delete_lesson">Удалить урок</string>
+    <string name="common_delete">Удалить</string>
     <string name="common_tv_name">Имя</string>
     <string name="common_grade">Класс</string>
+    <string name="common_grade_lowercase">класс</string>
+    <string name="common_snack_bar_user_delete">Ученик удален</string>
+    <string name="common_snack_bar_user_added">Ученик добавлен</string>
+    <string name="common_snack_bar_lesson_delete">Урок удален</string>
 
 
     <!--Strings for AddUserFragment-->
@@ -32,12 +36,15 @@
     <string name="update_user_fragment_telegram_hint">Telegram Номер/ID</string>
     <string name="update_user_fragment_mom_or_dad_hint">Мама/папа</string>
     <string name="update_user_fragment_mom_or_dad_name_hint">Имя родителя</string>
+    <string name="update_user_fragment_data_changed_toast">Данные изменены!</string>
+    <string name="update_user_fragment_fill_all_data_toast">Заполните все данные</string>
 
     <!--Strings for UserFullInformationFragment-->
     <string name="user_full_information_fragment_btn_back">Ученик</string>
     <string name="user_full_information_fragment_btn_edit">Редактировать</string>
     <string name="user_full_information_fragment_btn_telegram_write_message">Написать в Telegram</string>
     <string name="user_full_information_fragment_btn_make_lesson">Назначить занятие</string>
+    <string name="user_full_information_fragment_add_name_toast">Добавьте имя пользователя из Telegram</string>
 
     <!--Strings for AddLessonFragment-->
     <string name="add_lesson_fragment_tv_at">в</string>
@@ -47,12 +54,14 @@
     <string name="add_lesson_fragment_tv_formatter">%1$s, %2$s %3$s %4$s</string>
     <string name="add_lesson_fragment_tv_name_grade_hint">Имя ученика и класс</string>
     <string name="add_lesson_fragment_tv_date">Выбрать дату</string>
+    <string name="add_lesson_fragment_toast_select_date">Выбирите дату</string>
 
     <!--Strings for ListLessonFragment-->
     <string name="list_lesson_fragment_btn_back">Уроки</string>
 
     <!--Strings for UpdateLessonFragment-->
     <string name="update_lesson_fragment_btn_back">Урок</string>
+    <string name="update_lesson_fragment_lesson_updated">Урок изменен</string>
 
     <!--Strings for DeleteUserAlertDialogs-->
     <string name="delete_user_alert_dialog_tv_delete_message_text">Вы точно хотите удалеть этого ученика?</string>

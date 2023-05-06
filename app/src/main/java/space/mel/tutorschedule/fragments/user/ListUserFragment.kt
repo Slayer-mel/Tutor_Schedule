@@ -17,6 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.ListUserFragmentBlackBinding
 import space.mel.tutorschedule.model.User
+import space.mel.tutorschedule.utils.Constants
 import space.mel.tutorschedule.utils.SwipeHelper
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
@@ -36,10 +37,43 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = ListUserFragmentBlackBinding.inflate(layoutInflater)
+        return binding.root
+    }
 
-        //TODO: Какого хрена это всё делает в OnCreateView? Перемести в onViewCreated
-        // и разнеси по функциям. У тебя тут и сетап recyclerView, и observe, и collect
-        // Recyclerview
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initListeners()
+        initAdapter()
+        initObservers()
+    }
+
+    private fun initObservers() {
+        // UserViewModel
+        userViewModel.users.observe(viewLifecycleOwner) {
+            listUserAdapter.submitList(it)
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            userViewModel.userEvent.collect { event ->
+                when (event) {
+                    is UserViewModel.UserEvent.ShowUndoDeleteUserMessage -> {
+                        Snackbar.make(
+                            requireView(),
+                            R.string.common_snack_bar_user_delete,
+                            Snackbar.LENGTH_INDEFINITE
+                        )
+                            .setAction(R.string.common_btn_cancel_gray_background) {
+                                userViewModel.addUser(event.user)
+                            }
+                            .setDuration(Constants.DURATION_TIME_DELETE_MESSAGE)
+                            .setActionTextColor(Color.RED)
+                            .show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun initAdapter() {
         binding.apply {
             recyclerview.apply {
                 layoutManager = LinearLayoutManager(requireContext())
@@ -56,37 +90,6 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
             ).attachToRecyclerView(recyclerview)
         }
-
-        // UserViewModel
-        userViewModel.users.observe(viewLifecycleOwner) {
-            listUserAdapter.submitList(it)
-        }
-
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            userViewModel.userEvent.collect { event ->
-                when (event) {
-                    is UserViewModel.UserEvent.ShowUndoDeleteUserMessage -> {
-                        Snackbar.make(
-                            requireView(),
-                            //TODO: В строковые ресурсы
-                            "Ученик удалён",
-                            Snackbar.LENGTH_INDEFINITE
-                        )
-                            //TODO: В строковые ресурсы
-                            .setAction("Отмена") {
-                                userViewModel.addUser(event.user)
-                            }
-                            //TODO: Magic number
-                            .setDuration(4500)
-                            .setActionTextColor(Color.RED)
-                            .show()
-                    }
-                }
-            }
-        }
-
-        initListeners()
-        return binding.root
     }
 
     private fun initListeners() {
@@ -97,10 +100,6 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
         }
         //search Query
         binding.search.setOnQueryTextListener(this)
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     }
 
     private fun startFullInformation(user: User) {

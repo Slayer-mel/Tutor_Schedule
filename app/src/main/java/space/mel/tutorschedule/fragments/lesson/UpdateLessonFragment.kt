@@ -40,8 +40,9 @@ class UpdateLessonFragment: Fragment() {
         with(binding){
             btnOk.setOnClickListener {
                 //updateItem()
-                //TODO: В строковые ресурсы
-                Toast.makeText(requireContext(), "Редактировать", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),
+                    R.string.update_lesson_fragment_lesson_updated,
+                    Toast.LENGTH_SHORT).show()
             }
             btnBack.setOnClickListener {
                 goBack()

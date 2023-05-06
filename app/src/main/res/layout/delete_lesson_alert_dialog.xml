@@ -77,7 +77,7 @@
         android:layout_marginTop="12dp"
         android:padding="18dp"
         android:gravity="center"
-        android:text="@string/common_btn_cancel_gray_background"
+        android:text="@string/common_delete"
         android:textColor="@color/red"
         android:textSize="16sp"
         android:fontFamily="@font/gilroy_medium"/>

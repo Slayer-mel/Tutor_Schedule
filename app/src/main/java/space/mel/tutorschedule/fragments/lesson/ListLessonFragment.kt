@@ -16,6 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.ListLessonFragmentBlackBinding
 import space.mel.tutorschedule.model.Lesson
+import space.mel.tutorschedule.utils.Constants
 import space.mel.tutorschedule.utils.SwipeHelper
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
@@ -37,10 +38,42 @@ class ListLessonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initListeners()
         initAdapter()
+        initObservers()
+    }
+
+    private fun initObservers() {
+        // UserViewModel
+        userViewModel.lessons.observe(viewLifecycleOwner) { lessonList ->
+            val userId = userViewModel.currentUserEditable.value!!.id
+
+            val filteredListOfLesson = lessonList.filter {
+                it.userId?.contains(userId) == true
+            }
+            val sortedListOfLesson = filteredListOfLesson.sortedByDescending { it.dataOfLesson }
+            listLessonAdapter.submitList(sortedListOfLesson)
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            userViewModel.lessonEvent.collect { event ->
+                if (event is UserViewModel.LessonEvent.ShowUndoDeleteLessonMessage) {
+                    Snackbar.make(
+                        requireView(),
+                        R.string.common_snack_bar_lesson_delete,
+                        Snackbar.LENGTH_INDEFINITE
+                    )
+                        .setAction(R.string.common_btn_cancel_gray_background) {
+                            userViewModel.addLesson(event.lesson)
+                        }
+                        .setDuration(Constants.DURATION_TIME_DELETE_MESSAGE)
+                        .setActionTextColor(Color.RED)
+                        .show()
+                }
+            }
+        }
     }
 
     private fun initListeners() {
-        with(binding){
+        with(binding) {
             btnBack.setOnClickListener {
                 findNavController().navigate(R.id.action_listLessonFragment_to_userFullInformation)
             }
@@ -56,51 +89,13 @@ class ListLessonFragment : Fragment() {
             }
             //swipe delete item from Room DB
             ItemTouchHelper(
-                SwipeHelper{ viewHolderAdapterPosition->
+                SwipeHelper { viewHolderAdapterPosition ->
                     val lesson = listLessonAdapter.currentList[viewHolderAdapterPosition]
                     lifecycleScope.launch {
                         userViewModel.deleteLesson(lesson)
                     }
                 }
             ).attachToRecyclerView(recyclerview)
-        }
-
-        // UserViewModel
-        //TODO: Какого хуя это делает в функции "initAdapter"?
-        userViewModel.lessons.observe(viewLifecycleOwner) { lessonList ->
-            val userId = userViewModel.currentUserEditable.value!!.id
-
-            val filteredListOfLesson = lessonList.filter {
-                it.userId?.contains(userId) == true
-            }
-            val sortedListOfLesson = filteredListOfLesson.sortedByDescending { it.dataOfLesson }
-            listLessonAdapter.submitList(sortedListOfLesson)
-        }
-
-        //TODO: Какого хуя это делает в функции "initAdapter"?
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            userViewModel.lessonEvent.collect { event ->
-                //TODO: Тебе не нужен when, если у тебя всего одно условие. Используй if
-                when (event) {
-                    is UserViewModel.LessonEvent.ShowUndoDeleteLessonMessage -> {
-                        Snackbar.make(
-                            requireView(),
-                            //TODO: В строковые ресурсы
-                            "Урок удалён",
-                            Snackbar.LENGTH_INDEFINITE
-                        )
-                            //TODO: В строковые ресурсы
-                            .setAction("Отмена") {
-                                userViewModel.addLesson(event.lesson)
-                            }
-                            //TODO: Стилистическая ошибка, которая называется "Magic number".
-                            // Вынеси эту цифру в константу и назови нормально
-                            .setDuration(4500)
-                            .setActionTextColor(Color.RED)
-                            .show()
-                    }
-                }
-            }
         }
     }
 
