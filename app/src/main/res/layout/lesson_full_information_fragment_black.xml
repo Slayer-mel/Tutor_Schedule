@@ -18,7 +18,7 @@
         android:textSize="20sp"
         android:layout_marginStart="24dp"
         android:fontFamily="@font/gilroy_medium"
-        android:text="Урок"
+        android:text="@string/common_lesson"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -43,15 +43,14 @@
         android:id="@+id/tvHomeTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="20dp"
-        android:padding="18dp"
-        android:hint="Нету домашнего задания"
+        android:hint="@string/user_lesson_information_fragment_hint_no_task"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBack"/>
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        style="@style/whiteTextView18sp"/>
 
 
     <TextView
@@ -61,13 +60,9 @@
         app:layout_constraintStart_toStartOf="@id/tvHomeTask"
         app:layout_constraintEnd_toEndOf="@id/tvHomeTask"
         app:layout_constraintTop_toBottomOf="@id/tvHomeTask"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="24dp"
-        android:padding="18dp"
-        android:hint="Тема урока"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_regular"/>
+        android:hint="@string/common_hint_tv_topic"
+        style="@style/whiteTextView18sp"/>
 
 
     <TextView
@@ -77,13 +72,9 @@
         app:layout_constraintStart_toStartOf="@id/tvHomeTask"
         app:layout_constraintEnd_toEndOf="@id/tvHomeTask"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginBottom="24dp"
-        android:padding="18dp"
-        android:text="Удалить урок"
-        android:textColor="@color/red"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_regular"/>
+        android:text="@string/common_delete_lesson"
+        style="@style/redTextView18sp"/>
 
     <ImageView
         android:id="@+id/ivDeleteUser"
@@ -94,9 +85,4 @@
         app:layout_constraintBottom_toBottomOf="@id/btnDeleteLesson"
         app:layout_constraintEnd_toEndOf="@id/btnDeleteLesson"
         android:src="@drawable/ic_trash"/>
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

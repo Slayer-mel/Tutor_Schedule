@@ -56,16 +56,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnEdit"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="24dp"
         android:hint="@string/common_tv_name"
-        android:padding="18dp"
         android:inputType="textCapSentences"
-        android:textColor="@color/white"
-        android:textSize="18sp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:fontFamily="@font/gilroy_medium"/>
+        android:fontFamily="@font/gilroy_medium"
+        style="@style/whiteTextView18sp"/>
 
     <EditText
         android:id="@+id/edtAddGrade"
@@ -75,13 +72,11 @@
         app:layout_constraintEnd_toEndOf="@id/edtAddName"
         app:layout_constraintTop_toBottomOf="@id/edtAddName"
         android:hint="@string/common_grade"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="12dp"
         android:padding="18dp"
         android:inputType="number"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_medium"/>
+        android:fontFamily="@font/gilroy_medium"
+        style="@style/whiteTextView18sp"/>
 
     <EditText
         android:id="@+id/edtPhoneNumber"
@@ -90,14 +85,11 @@
         app:layout_constraintStart_toStartOf="@id/edtAddName"
         app:layout_constraintEnd_toEndOf="@id/edtAddName"
         app:layout_constraintTop_toBottomOf="@id/edtAddGrade"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="12dp"
-        android:padding="18dp"
         android:inputType="phone"
         android:hint="@string/add_user_fragment_telephone_hint"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_medium"/>
+        android:fontFamily="@font/gilroy_medium"
+        style="@style/whiteTextView18sp"/>
 
     <TextView
         android:id="@+id/btnCancel"
@@ -107,15 +99,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnOk"
         android:layout_marginBottom="136dp"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:padding="18dp"
         android:gravity="center"
         android:text="@string/common_btn_cancel_gray_background"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_medium"/>
+        style="@style/whiteTextView18sp"/>
 
     <TextView
         android:id="@+id/btnOk"
@@ -124,7 +112,8 @@
         app:layout_constraintStart_toEndOf="@id/btnCancel"
         app:layout_constraintBottom_toBottomOf="@id/btnCancel"
         app:layout_constraintEnd_toEndOf="@id/edtAddName"
-        android:background="@drawable/btn_ok_bg"
+        android:background="@drawable/btn_ok_selector"
+        android:enabled="false"
         android:layout_marginTop="12dp"
         android:padding="18dp"
         android:gravity="center"

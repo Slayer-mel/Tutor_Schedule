@@ -100,11 +100,16 @@ class UpdateUserFragment : Fragment() {
                 updateUser(updatedUser)
                 currentUserEditable.value = updatedUser
             }
-            Toast.makeText(requireContext(), "Данные изменены!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                R.string.update_user_fragment_data_changed_toast,
+                Toast.LENGTH_SHORT
+            ).show()
             findNavController().navigate(R.id.action_updateFragment_to_userFullInformation)
         } else {
-            Toast.makeText(requireContext(), "Заполните все данные", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(requireContext(),
+                R.string.update_user_fragment_fill_all_data_toast,
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
     override fun onDestroy() {

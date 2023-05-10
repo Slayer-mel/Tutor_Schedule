@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/userFullInformation"
-        android:name="space.mel.tutorschedule.fragments.user.UserFullInformation"
+        android:name="space.mel.tutorschedule.fragments.user.UserFullInformationFragment"
         android:label="UserFullInformation"
         tools:layout="@layout/user_full_information_fragment_black">
         <action
@@ -89,7 +89,7 @@
     </fragment>
     <fragment
         android:id="@+id/lessonFullInformation"
-        android:name="space.mel.tutorschedule.fragments.lesson.LessonFullInformation"
+        android:name="space.mel.tutorschedule.fragments.lesson.LessonFullInformationFragment"
         android:label="LessonFullInformation"
         tools:layout="@layout/lesson_full_information_fragment_black">
         <action

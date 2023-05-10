@@ -2,6 +2,7 @@ package space.mel.tutorschedule.utils
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
+import java.util.*
 
 object DateTimeHelper {
 
@@ -13,7 +14,12 @@ object DateTimeHelper {
     fun getDayOfWeek(millis: Long, isCapitalize: Boolean = false): String {
         return SimpleDateFormat(DAY_OF_WEEK).run {
             format(millis).apply {
-                if (isCapitalize) {capitalize()}
+
+                if (isCapitalize) {
+                    replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(Locale.getDefault())
+                        else it.toString() }
+                }
             }
         }
     }

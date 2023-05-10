@@ -103,13 +103,9 @@
         app:layout_constraintStart_toStartOf="@id/imgUserBack"
         app:layout_constraintEnd_toEndOf="@id/imgUserBack"
         app:layout_constraintTop_toBottomOf="@id/imgUserBack"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="24dp"
-        android:padding="18dp"
-        android:text="Список занятий"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_regular"/>
+        android:text="@string/user_full_information_fragment_list_if_lesson"
+        style="@style/whiteTextView18sp"/>
 
     <ImageView
         android:id="@+id/icMakeCalll"
@@ -129,13 +125,9 @@
         app:layout_constraintStart_toStartOf="@id/imgUserBack"
         app:layout_constraintEnd_toEndOf="@id/imgUserBack"
         app:layout_constraintTop_toBottomOf="@id/btnAllLessonsList"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="12dp"
-        android:padding="18dp"
-        android:hint="Введите телефон"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_regular"/>
+        android:hint="@string/user_full_information_fragment_add_tel_number"
+        style="@style/whiteTextView18sp"/>
 
     <ImageView
         android:id="@+id/icMakeCall"
@@ -154,13 +146,9 @@
         app:layout_constraintStart_toStartOf="@id/imgUserBack"
         app:layout_constraintEnd_toEndOf="@id/imgUserBack"
         app:layout_constraintTop_toBottomOf="@id/btnMakeCall"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="12dp"
-        android:padding="18dp"
         android:text="@string/user_full_information_fragment_btn_telegram_write_message"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_regular"/>
+        style="@style/whiteTextView18sp"/>
 
     <ImageView
         android:id="@+id/icTelegramWriteMessage"
@@ -179,13 +167,9 @@
         app:layout_constraintStart_toStartOf="@id/imgUserBack"
         app:layout_constraintEnd_toEndOf="@id/imgUserBack"
         app:layout_constraintTop_toBottomOf="@id/btnTelegramWriteMessage"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="12dp"
-        android:padding="18dp"
         android:text="@string/user_full_information_fragment_btn_make_lesson"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_regular"/>
+        style="@style/whiteTextView18sp"/>
 
     <ImageView
         android:id="@+id/icCalendarClock"
@@ -197,9 +181,6 @@
         app:layout_constraintEnd_toEndOf="@id/btnMakeLesson"
         android:src="@drawable/ic_calendar_clock"/>
 
-
-
-
     <TextView
         android:id="@+id/btnDeleteUser"
         android:layout_width="0dp"
@@ -207,13 +188,9 @@
         app:layout_constraintStart_toStartOf="@id/imgUserBack"
         app:layout_constraintEnd_toEndOf="@id/imgUserBack"
         app:layout_constraintTop_toBottomOf="@id/btnMakeLesson"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="24dp"
-        android:padding="18dp"
         android:text="@string/common_delete_user"
-        android:textColor="@color/red"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_regular"/>
+        style="@style/redTextView18sp"/>
 
     <ImageView
         android:id="@+id/ivDeleteUser"
@@ -224,9 +201,4 @@
         app:layout_constraintBottom_toBottomOf="@id/btnDeleteUser"
         app:layout_constraintEnd_toEndOf="@id/btnDeleteUser"
         android:src="@drawable/ic_trash"/>
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

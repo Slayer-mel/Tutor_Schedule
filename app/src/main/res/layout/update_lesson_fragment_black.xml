@@ -18,7 +18,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/gilroy_medium"
-        android:text="@string/update_lesson_fragment_btn_back"
+        android:text="@string/common_lesson"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,33 +30,28 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/rv_item_bg_2"
         android:fontFamily="@font/gilroy_medium"
         android:inputType="textCapSentences"
-        android:padding="12dp"
-        android:textColor="@color/white"
-        android:textSize="18sp"
         android:layout_marginTop="20dp"
-        android:hint="Нету домашнего задания"
+        android:padding="12dp"
+        android:hint="@string/update_lesson_fragment_lesson_hint_no_task"
         app:layout_constraintTop_toBottomOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/whiteTextView18sp"/>
 
     <EditText
         android:id="@+id/edtUpdateTopic"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="12dp"
         app:layout_constraintStart_toStartOf="@id/edtUpdateHomeWork"
         app:layout_constraintEnd_toEndOf="@id/edtUpdateHomeWork"
         app:layout_constraintTop_toBottomOf="@id/edtUpdateHomeWork"
-        android:hint="Тема урока"
-        android:background="@drawable/rv_item_bg_2"
+        android:hint="@string/common_hint_tv_topic"
         android:layout_marginTop="12dp"
-        android:padding="12dp"
-        android:inputType="number"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_medium"/>
+        android:fontFamily="@font/gilroy_medium"
+        style="@style/whiteTextView18sp"/>
 
     <TextView
         android:id="@+id/btnCancel"
@@ -66,15 +61,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnOk"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:padding="18dp"
         android:gravity="center"
         android:text="@string/common_btn_cancel_gray_background"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_medium"/>
+        android:fontFamily="@font/gilroy_medium"
+        style="@style/whiteTextView18sp"/>
 
     <TextView
         android:id="@+id/btnOk"

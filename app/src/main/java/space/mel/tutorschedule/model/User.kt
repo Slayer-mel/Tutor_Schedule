@@ -19,6 +19,7 @@ data class User(
     val grade: Int,
     val phonePupilNumber: String? = null,
     val telegramPupilNumberOrId: String?= null,
+    //TODO: Нужна тебе тут эта аннотация или нет? И почему?
     @SerializedName("parent")
     var parent: Parent? = null,
     val lessonList : List<Int>? = null

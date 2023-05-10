@@ -1,37 +1,33 @@
 package space.mel.tutorschedule.fragments.lesson
 
 import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
+import android.app.TimePickerDialog.OnTimeSetListener
 import android.content.Intent
-import android.icu.util.Calendar
-import android.os.Build
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
-import android.widget.TimePicker
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.AddLessonFragmentBlackBinding
-import space.mel.tutorschedule.model.Lesson
 import space.mel.tutorschedule.utils.DateTimeHelper
+import space.mel.tutorschedule.utils.stringCapitalize
 import space.mel.tutorschedule.viewmodel.AddLessonViewModel
 import space.mel.tutorschedule.viewmodel.UserViewModel
+import java.util.*
 
-class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+class AddLessonFragment : Fragment() {
     private var _binding: AddLessonFragmentBlackBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModel<UserViewModel>()
-    private val addLessonViewModel by viewModel<AddLessonViewModel>()
-    @RequiresApi(Build.VERSION_CODES.N)
+    private val addLessonViewModel by activityViewModel<AddLessonViewModel>()
+
     private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
@@ -44,55 +40,37 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            binding.btnChooseLessonDateAndTime.setOnClickListener {
-            calendar.add(Calendar.DAY_OF_MONTH, 0)
-            val dialog=DatePickerDialog(
-                requireContext(),
-                R.style.datePickerTheme,
-                this,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-            //минимальная дата начала занятий с сегодняшнего дня
-            //dialog.datePicker.minDate = calendar.timeInMillis
-                with(dialog){
-                    setCancelable(false)
-                    show()
-                }
-        }
         initClickListeners()
         initObservers()
     }
 
     private fun initClickListeners() {
-        with(binding){
-            //add Lesson to Calendar
-                btnOk.setOnClickListener{
-                    val currentLessonTimeAndDate = addLessonViewModel.currentLessonTimeAndDateLiveData.value
-                    if (btnChooseLessonDateAndTime.text.isNotEmpty()){
-                        val title = userViewModel.currentUserEditable.value?.name
-                        val intent  = Intent(Intent.ACTION_INSERT)
-                            .setData(CalendarContract.Events.CONTENT_URI)
-                            .putExtra(CalendarContract.Events.TITLE, title)
-                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, currentLessonTimeAndDate)
-                            .putExtra(
-                                CalendarContract.EXTRA_EVENT_END_TIME,
-                                CalendarContract.EXTRA_EVENT_BEGIN_TIME + 60*60*1000)
-                        startActivity(intent)
-                        val lesson= Lesson(
-                            dataOfLesson = currentLessonTimeAndDate,
-                            userId = userViewModel.currentUserEditable.value?.let { user ->
-                                listOf(user.id)
-                            }
-                        )
-                        userViewModel.addLesson(lesson)
-                    }else {
-                        Toast.makeText(requireContext(), "Выбирите дату", Toast.LENGTH_SHORT).show()
-                    }
+        with(binding) {
+            btnOk.setOnClickListener {
+                val currentLessonTimeAndDate =
+                    addLessonViewModel.currentLessonTimeAndDateLiveData.value
+                setLessonToCalendarIntent(currentLessonTimeAndDate)
+                //TODO: Добавь наверное ещё в userViewModel функцию чтоб отдавала
+                // тебе список из userId. Тут тоже норм, но не красиво смотрится
+                addLessonViewModel.addLesson(
+                    userViewModel.currentUserEditable.value?.let { user ->
+                    listOf(user.id)
+                })
+            }
+            btnSelectLessonDateAndTime.setOnClickListener {
+                DatePickerDialog(
+                    requireContext(),
+                    R.style.datePickerTheme,
+                    getDateListener(getTimeListener()),
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)
+                ).run {
+                    setCancelable(false)
+                    show()
                 }
+            }
             btnCancel.setOnClickListener {
                 goBack()
             }
@@ -103,54 +81,43 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
     }
 
     private fun goBack() {
-            findNavController().navigate(R.id.action_addLesson_to_userFullInformation)
+        findNavController().navigate(R.id.action_addLesson_to_userFullInformation)
+    }
+
+    //TODO: Хуёвое имя. В этой функции конечная цель - навигация на другую активити,
+    // вот и назови соответствующе
+    private fun setLessonToCalendarIntent(currentLessonTimeAndDate: Long?) {
+        val title = userViewModel.currentUserEditable.value?.name
+        val intent = Intent(Intent.ACTION_INSERT)
+            .setData(CalendarContract.Events.CONTENT_URI)
+            .putExtra(CalendarContract.Events.TITLE, title)
+            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, currentLessonTimeAndDate)
+            .putExtra(
+                CalendarContract.EXTRA_EVENT_END_TIME,
+                CalendarContract.EXTRA_EVENT_BEGIN_TIME + 60 * 60 * 1000
+            )
+        startActivity(intent)
     }
 
     private fun initObservers() {
-        addLessonViewModel.dateAndTime.observe(viewLifecycleOwner){ dataAndTime->
-            binding.btnChooseLessonDateAndTime.text = dataAndTime
+        addLessonViewModel.dateAndTime.observe(viewLifecycleOwner) { dataAndTime ->
+            binding.btnSelectLessonDateAndTime.text = stringCapitalize(dataAndTime)
             Log.d("displayFormattedDate", dataAndTime)
         }
-        addLessonViewModel.currentLessonTimeAndDateLiveData.observe(viewLifecycleOwner){date->
+        addLessonViewModel.currentLessonTimeAndDateLiveData.observe(viewLifecycleOwner) { date ->
             displayFormattedDate(date)
         }
-        userViewModel.currentUserEditable.observe(viewLifecycleOwner){user->
-            with(binding){
+        userViewModel.currentUserEditable.observe(viewLifecycleOwner) { user ->
+            with(binding) {
                 val grade = getString(R.string.common_grade)
-                tvUserInfo.text = "${user.name+ "  " + user.grade+ " " + grade}"
+                tvUserInfo.text = "${user.name + "  " + user.grade + " " + grade}"
                 btnBack.text = user.name
             }
         }
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        calendar.set(year, month, dayOfMonth)
-        val timePicker = TimePickerDialog(
-            requireContext(),
-            R.style.timePickerTheme,
-            this,
-            calendar.get(Calendar.HOUR_OF_DAY),
-            calendar.get(Calendar.MINUTE),
-            true
-        )
-        with(timePicker){
-            setCancelable(false)
-            show()
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        calendar.apply {
-            set(Calendar.HOUR_OF_DAY, hourOfDay)
-            set(Calendar.MINUTE, minute)
-        }
-        addLessonViewModel.onDateAndTimeSetChanges(calendar.timeInMillis)
-    }
-
-    private fun displayFormattedDate(timestamp: Long){
+    private fun displayFormattedDate(timestamp: Long) {
         val dayOfWeek = DateTimeHelper.getDayOfWeek(timestamp, true)
         val dayMonthYear = DateTimeHelper.getDayMonthYear(timestamp)
         val time = DateTimeHelper.getTimeHoursMinutes(timestamp)
@@ -163,10 +130,40 @@ class AddLessonFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePi
             time
         )
         addLessonViewModel.setDateAndTime(fullDateOfLesson)
+        binding.btnOk.isEnabled = true
+    }
+
+    private fun getDateListener(timeListener: OnTimeSetListener): OnDateSetListener {
+        val dateListener = OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            calendar.set(year, monthOfYear, dayOfMonth)
+            TimePickerDialog(
+                requireContext(),
+                R.style.timePickerTheme,
+                timeListener,
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                true
+            ).run {
+                setCancelable(false)
+                show()
+            }
+        }
+        return dateListener
+    }
+
+    private fun getTimeListener(): OnTimeSetListener {
+        val timeListener = OnTimeSetListener { _, hourOfDay, minute ->
+            calendar.apply {
+                set(Calendar.HOUR_OF_DAY, hourOfDay)
+                set(Calendar.MINUTE, minute)
+            }
+            addLessonViewModel.onDateAndTimeSetChanges(calendar.timeInMillis)
+        }
+        return timeListener
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding=null
+        _binding = null
     }
 }

@@ -17,10 +17,12 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.ListUserFragmentBlackBinding
 import space.mel.tutorschedule.model.User
+import space.mel.tutorschedule.utils.Constants
 import space.mel.tutorschedule.utils.SwipeHelper
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
-class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
+class ListUserFragment : Fragment()/*,
+    SearchView.OnQueryTextListener*/ {
     private var _binding: ListUserFragmentBlackBinding? = null
     private val binding get() = _binding!!
 
@@ -35,25 +37,16 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = ListUserFragmentBlackBinding.inflate(layoutInflater)
+        return binding.root
+    }
 
-        // Recyclerview
-        binding.apply {
-            recyclerview.apply {
-                layoutManager = LinearLayoutManager(requireContext())
-                adapter = listUserAdapter
-                setHasFixedSize(true)
-            }
-            //swipe delete item from Room DB
-            ItemTouchHelper(
-                SwipeHelper{ viewHolderAdapterPosition->
-                    val user = listUserAdapter.currentList[viewHolderAdapterPosition]
-                    lifecycleScope.launch {
-                        userViewModel.deleteUser(user)
-                    }
-                }
-            ).attachToRecyclerView(recyclerview)
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initListeners()
+        initAdapter()
+        initObservers()
+    }
 
+    private fun initObservers() {
         // UserViewModel
         userViewModel.users.observe(viewLifecycleOwner) {
             listUserAdapter.submitList(it)
@@ -65,22 +58,38 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
                     is UserViewModel.UserEvent.ShowUndoDeleteUserMessage -> {
                         Snackbar.make(
                             requireView(),
-                            "Ученик удалён",
+                            R.string.common_snack_bar_user_delete,
                             Snackbar.LENGTH_INDEFINITE
                         )
-                            .setAction("Отмена") {
+                            .setAction(R.string.common_btn_cancel_gray_background) {
                                 userViewModel.addUser(event.user)
                             }
-                            .setDuration(4500)
+                            .setDuration(Constants.DURATION_TIME_DELETE_MESSAGE)
                             .setActionTextColor(Color.RED)
                             .show()
                     }
                 }
             }
         }
+    }
 
-        initListeners()
-        return binding.root
+    private fun initAdapter() {
+        binding.apply {
+            recyclerview.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = listUserAdapter
+                setHasFixedSize(true)
+            }
+            //swipe delete item from Room DB
+            ItemTouchHelper(
+                SwipeHelper { viewHolderAdapterPosition ->
+                    val user = listUserAdapter.currentList[viewHolderAdapterPosition]
+                    lifecycleScope.launch {
+                        userViewModel.deleteUser(user)
+                    }
+                }
+            ).attachToRecyclerView(recyclerview)
+        }
     }
 
     private fun initListeners() {
@@ -90,11 +99,8 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
             }
         }
         //search Query
-        binding.search.setOnQueryTextListener(this)
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        searchQuery()
+        //binding.search.setOnQueryTextListener(this)
     }
 
     private fun startFullInformation(user: User) {
@@ -103,26 +109,30 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun searchDatabase(query: String) {
-        val searchQuery = "%$query%"
-        userViewModel.searchDatabase(searchQuery).observe(this) { list ->
+            userViewModel.searchDatabase(query).observe(this) { list ->
             list.let { listOfUser ->
                 listUserAdapter.submitList(listOfUser)
             }
         }
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        return false
+    private fun searchQuery() {
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                if (query != null) {
+                    searchDatabase(query)
+                }
+                return true
+            }
+        })
     }
 
-    override fun onQueryTextChange(query: String?): Boolean {
-        if (query != null) {
-            searchDatabase(query)
-        }
-        return true
-    }
     override fun onDestroy() {
         super.onDestroy()
-        _binding=null
+        _binding = null
     }
 }

@@ -1,6 +1,5 @@
 package space.mel.tutorschedule.fragments.lesson
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,19 +7,23 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import space.mel.tutorschedule.databinding.RvLessonItemBlackBinding
 import space.mel.tutorschedule.model.Lesson
+import space.mel.tutorschedule.utils.stringCapitalize
 import java.text.SimpleDateFormat
+import java.util.*
 
 class ListLessonAdapter(val onClick: (Lesson) -> Unit) :
     ListAdapter<Lesson, ListLessonAdapter.LessonViewHolder>(DiffCallback()) {
 
     inner class LessonViewHolder(private val binding: RvLessonItemBlackBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SimpleDateFormat")
         fun bind(lesson: Lesson) {
             binding.apply {
-                val simpleDateFormat = SimpleDateFormat("EEEE, dd.MM.yyyy \n HH:mm ")
+                //TODO: Для всех конвертаций времени используй DateTimeHelper. Ты ж не зря его создавал
+                val simpleDateFormat = SimpleDateFormat("EEEE, dd.MM.yyyy \n HH:mm ", Locale.getDefault())
                 val dateString = simpleDateFormat.format(lesson.dataOfLesson)
-                tvLessonDate.text = dateString.capitalize()
+                tvLessonDate.text = stringCapitalize(dateString)
+                //TODO: Удоли
+                //tvLessonDate.text = dateString.capitalize(Locale.ROOT)
 
                 root.setOnClickListener {
                     onClick.invoke(lesson)
