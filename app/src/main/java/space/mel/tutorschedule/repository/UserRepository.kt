@@ -1,23 +1,10 @@
 package space.mel.tutorschedule.repository
 
 import kotlinx.coroutines.flow.Flow
-import space.mel.tutorschedule.data.LessonDao
 import space.mel.tutorschedule.data.UserDao
-import space.mel.tutorschedule.model.Lesson
 import space.mel.tutorschedule.model.User
 
-class UserRepository(
-    private val userDao: UserDao,
-    private val lessonDao: LessonDao
-    ){
-
-    suspend fun addLesson(lesson: Lesson) {
-        lessonDao.addLesson(lesson)
-    }
-
-    suspend fun deleteLesson(lesson: Lesson) {
-        lessonDao.deleteLesson(lesson)
-    }
+class UserRepository(private val userDao: UserDao) {
 
     suspend fun readAllData(): List<User> = userDao.readAllData()
 
@@ -42,5 +29,4 @@ class UserRepository(
     }
 
     fun getUser(): Flow<List<User>> = userDao.getUser()
-    fun getLesson(): Flow<List<Lesson>> = lessonDao.getLesson()
 }

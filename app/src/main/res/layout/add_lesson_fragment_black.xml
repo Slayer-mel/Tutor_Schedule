@@ -6,9 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black">
 
-    <!--TODO: Создай стили для текствьюшек. В стиле ты можешь
-     указать шрифт, размер, цвет текста и т.д. Потом в каждой текствьюшке ты
-     можешь юзать textStyle = ...-->
     <TextView
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
@@ -33,15 +30,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnBack"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="24dp"
-        android:padding="18dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/add_lesson_fragment_tv_name_grade_hint"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_regular"/>
+        android:fontFamily="@font/gilroy_medium"
+        style="@style/whiteTextView18sp"/>
 
     <TextView
         android:id="@+id/btnSelectLessonDateAndTime"
@@ -50,18 +44,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvUserInfo"
+        android:textSize="18sp"
         android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="12dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gilroy_regular"
         android:hint="@string/add_lesson_fragment_tv_date"
         android:paddingStart="18dp"
         android:paddingTop="18dp"
         android:paddingBottom="18dp"
         android:paddingEnd="42dp"
-        android:textColor="@color/white"
-        android:textSize="18sp"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="@font/gilroy_medium"/>
+        android:layout_marginEnd="24dp"/>
 
     <ImageView
         android:id="@+id/icCalendarClock"
@@ -81,15 +75,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnOk"
         android:layout_marginBottom="136dp"
-        android:background="@drawable/rv_item_bg_2"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:padding="18dp"
         android:gravity="center"
         android:text="@string/common_btn_cancel_gray_background"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:fontFamily="@font/gilroy_medium"/>
+        style="@style/whiteTextView18sp"/>
 
     <TextView
         android:id="@+id/btnOk"
@@ -107,22 +97,5 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:fontFamily="@font/gilroy_medium" />
-
-
-    <!--<com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="layout text"
-        android:layout_margin="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnChooseLessonDateAndTime"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/edtInputTextFirst"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

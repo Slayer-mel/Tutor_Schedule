@@ -14,10 +14,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.AddLessonFragmentBlackBinding
-import space.mel.tutorschedule.model.Lesson
 import space.mel.tutorschedule.utils.DateTimeHelper
 import space.mel.tutorschedule.utils.stringCapitalize
 import space.mel.tutorschedule.viewmodel.AddLessonViewModel
@@ -28,7 +26,7 @@ class AddLessonFragment : Fragment() {
     private var _binding: AddLessonFragmentBlackBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModel<UserViewModel>()
-    private val addLessonViewModel by viewModel<AddLessonViewModel>()
+    private val addLessonViewModel by activityViewModel<AddLessonViewModel>()
 
     private val calendar = Calendar.getInstance()
 
@@ -49,18 +47,13 @@ class AddLessonFragment : Fragment() {
 
     private fun initClickListeners() {
         with(binding) {
-            //TODO: переделать логику вьюмоделей
             btnOk.setOnClickListener {
                 val currentLessonTimeAndDate =
                     addLessonViewModel.currentLessonTimeAndDateLiveData.value
                 setLessonToCalendarIntent(currentLessonTimeAndDate)
-                val lesson = Lesson(
-                    dataOfLesson = currentLessonTimeAndDate,
-                    userId = userViewModel.currentUserEditable.value?.let { user ->
-                        listOf(user.id)
-                    }
-                )
-                userViewModel.addLesson(lesson)
+                addLessonViewModel.addLesson(userViewModel.currentUserEditable.value?.let { user ->
+                    listOf(user.id)
+                })
             }
             btnSelectLessonDateAndTime.setOnClickListener {
                 DatePickerDialog(

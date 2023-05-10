@@ -10,12 +10,14 @@ import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.UpdateLessonFragmentBlackBinding
+import space.mel.tutorschedule.viewmodel.LessonViewModel
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
 class UpdateLessonFragment: Fragment() {
 
     private var _binding: UpdateLessonFragmentBlackBinding? = null
     private val binding get() = _binding!!
+    private val lessonViewModel by activityViewModel<LessonViewModel>()
     private val userViewModel by activityViewModel<UserViewModel>()
 
     override fun onCreateView(

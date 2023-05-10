@@ -18,12 +18,14 @@ import space.mel.tutorschedule.databinding.ListLessonFragmentBlackBinding
 import space.mel.tutorschedule.model.Lesson
 import space.mel.tutorschedule.utils.Constants
 import space.mel.tutorschedule.utils.SwipeHelper
+import space.mel.tutorschedule.viewmodel.LessonViewModel
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
 class ListLessonFragment : Fragment() {
     private var _binding: ListLessonFragmentBlackBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModel<UserViewModel>()
+    private val lessonViewModel by activityViewModel<LessonViewModel>()
     private val listLessonAdapter: ListLessonAdapter by lazy { ListLessonAdapter(::startFullInformation) }
 
     override fun onCreateView(
@@ -43,7 +45,7 @@ class ListLessonFragment : Fragment() {
 
     private fun initObservers() {
         // UserViewModel
-        userViewModel.lessons.observe(viewLifecycleOwner) { lessonList ->
+        lessonViewModel.lessons.observe(viewLifecycleOwner) { lessonList ->
             val userId = userViewModel.currentUserEditable.value!!.id
 
             val filteredListOfLesson = lessonList.filter {
@@ -54,15 +56,15 @@ class ListLessonFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            userViewModel.lessonEvent.collect { event ->
-                if (event is UserViewModel.LessonEvent.ShowUndoDeleteLessonMessage) {
+            lessonViewModel.lessonEvent.collect { event ->
+                if (event is LessonViewModel.LessonEvent.ShowUndoDeleteLessonMessage) {
                     Snackbar.make(
                         requireView(),
                         R.string.common_snack_bar_lesson_delete,
                         Snackbar.LENGTH_INDEFINITE
                     )
                         .setAction(R.string.common_btn_cancel_gray_background) {
-                            userViewModel.addLesson(event.lesson)
+                            lessonViewModel.addLesson(event.lesson)
                         }
                         .setDuration(Constants.DURATION_TIME_DELETE_MESSAGE)
                         .setActionTextColor(Color.RED)
@@ -92,7 +94,7 @@ class ListLessonFragment : Fragment() {
                 SwipeHelper { viewHolderAdapterPosition ->
                     val lesson = listLessonAdapter.currentList[viewHolderAdapterPosition]
                     lifecycleScope.launch {
-                        userViewModel.deleteLesson(lesson)
+                        lessonViewModel.deleteLesson(lesson)
                     }
                 }
             ).attachToRecyclerView(recyclerview)
@@ -100,7 +102,7 @@ class ListLessonFragment : Fragment() {
     }
 
     private fun startFullInformation(lesson: Lesson) {
-        userViewModel.currentLessonEditable.value = lesson
+        lessonViewModel.currentLessonEditable.value = lesson
         findNavController().navigate(R.id.action_listLessonFragment_to_lessonFullInformation)
     }
 

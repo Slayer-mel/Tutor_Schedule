@@ -12,6 +12,7 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import space.mel.tutorschedule.R
 import space.mel.tutorschedule.databinding.LessonFullInformationFragmentBlackBinding
 import space.mel.tutorschedule.utils.AlertDialogProvider
+import space.mel.tutorschedule.viewmodel.LessonViewModel
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
 
@@ -19,6 +20,7 @@ class LessonFullInformationFragment : Fragment() {
     private var _binding: LessonFullInformationFragmentBlackBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModel<UserViewModel>()
+    private val lessonViewModel by activityViewModel<LessonViewModel>()
     private var alertDeleteDialog: AlertDialog? = null
 
     override fun onCreateView(
@@ -48,11 +50,11 @@ class LessonFullInformationFragment : Fragment() {
 
 
     private fun initListeners() {
-        val lessonCurrent = userViewModel.currentLessonEditable.value
+        val lessonCurrent = lessonViewModel.currentLessonEditable.value
         with(binding) {
             btnEditLesson.setOnClickListener {
                 lessonCurrent?.let {
-                    userViewModel.setCurrentLessonEditable(lessonCurrent)
+                    lessonViewModel.setCurrentLessonEditable(lessonCurrent)
                     findNavController().navigate(R.id.action_lessonFullInformation_to_updateLessonFragment)
                 }
             }
@@ -75,14 +77,14 @@ class LessonFullInformationFragment : Fragment() {
     }
 
     private fun deleteLesson() {
-        val lesson = userViewModel.currentLessonEditable.value
+        val lesson = lessonViewModel.currentLessonEditable.value
         findNavController().navigate(R.id.action_lessonFullInformation_to_listLessonFragment)
-        lesson?.let { userViewModel.deleteLesson(it) }
+        lesson?.let { lessonViewModel.deleteLesson(it) }
     }
 
 
     private fun initObservers() {
-        userViewModel.currentLessonEditable.observe(viewLifecycleOwner) { lesson ->
+        lessonViewModel.currentLessonEditable.observe(viewLifecycleOwner) { lesson ->
             with(binding) {
                 /*tvName.text = user.name
                 tvGrade.text = user.grade.toString()+" класс"

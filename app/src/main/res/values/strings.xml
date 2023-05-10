@@ -2,7 +2,6 @@
     <string name="app_name">Расписание репетитора</string>
 
 
-
     <!--common Strings -->
     <string name="common_btn_cancel_gray_background">Отмена</string>
     <string name="common_btn_save_blue_background">Сохранить</string>
@@ -15,7 +14,8 @@
     <string name="common_snack_bar_user_delete">Ученик удален</string>
     <string name="common_snack_bar_user_added">Ученик добавлен</string>
     <string name="common_snack_bar_lesson_delete">Урок удален</string>
-
+    <string name="common_lesson">Урок</string>
+    <string name="common_hint_tv_topic">Тема урока</string>
 
     <!--Strings for AddUserFragment-->
     <string name="add_user_fragment_btn_back">Новый ученик</string>
@@ -29,6 +29,7 @@
     <string name="list_user_fragment_btn_add_user_text">Добавить</string>
     <string name="list_user_fragment_btn_message_icon">Чаты</string>
     <string name="list_user_fragment_btn_profile_icon">Профиль</string>
+    <string name="list_user_fragment_search_hint">Найти</string>
 
     <!--Strings for UpdateUserFragment-->
     <string name="update_user_fragment_btn_back">Редактировать профиль</string>
@@ -45,6 +46,12 @@
     <string name="user_full_information_fragment_btn_telegram_write_message">Написать в Telegram</string>
     <string name="user_full_information_fragment_btn_make_lesson">Назначить занятие</string>
     <string name="user_full_information_fragment_add_name_toast">Добавьте имя пользователя из Telegram</string>
+    <string name="user_full_information_fragment_add_tel_number">Введите телефон</string>
+    <string name="user_full_information_fragment_list_if_lesson">Список занятий</string>
+
+    <!--Strings for LessonFullInformationFragment-->
+
+    <string name="user_lesson_information_fragment_hint_no_task">Нету домашнего задания</string>
 
     <!--Strings for AddLessonFragment-->
     <string name="add_lesson_fragment_tv_at">в</string>
@@ -60,12 +67,12 @@
     <string name="list_lesson_fragment_btn_back">Уроки</string>
 
     <!--Strings for UpdateLessonFragment-->
-    <string name="update_lesson_fragment_btn_back">Урок</string>
     <string name="update_lesson_fragment_lesson_updated">Урок изменен</string>
+    <string name="update_lesson_fragment_lesson_hint_no_task">Нету домашнего задания</string>
 
     <!--Strings for DeleteUserAlertDialogs-->
-    <string name="delete_user_alert_dialog_tv_delete_message_text">Вы точно хотите удалеть этого ученика?</string>
+    <string name="delete_user_alert_dialog_tv_delete_message_text">Вы точно хотите удалить этого ученика?</string>
 
     <!--Strings for DeleteLessonAlertDialogs-->
-    <string name="delete_lesson_alert_dialog_tv_delete_message_text">Вы точно хотите удалеть этот урок?</string>
+    <string name="delete_lesson_alert_dialog_tv_delete_message_text">Вы точно хотите удалить этот урок?</string>
 </resources>

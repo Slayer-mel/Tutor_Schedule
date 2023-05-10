@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Имя"
+        android:text="@string/common_tv_name"
         android:fontFamily="@font/gilroy_medium"
         android:textStyle="bold"
         android:textSize="19sp"

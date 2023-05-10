@@ -22,7 +22,8 @@ interface UserDao {
     @Query("SELECT * FROM user_table ORDER BY id ASC")
     suspend fun readAllData(): List<User>
 
-    @Query("SELECT  * FROM user_table WHERE name LIKE :searchQuery OR grade LIKE :searchQuery")
+    @Query("SELECT  * FROM user_table WHERE name LIKE '%' || :searchQuery ||" +
+            " '%' OR grade LIKE '%' || :searchQuery  ||'%'")
     fun searchDatabase (searchQuery: String): Flow<List<User>>
 
     @Query("SELECT * FROM user_table")

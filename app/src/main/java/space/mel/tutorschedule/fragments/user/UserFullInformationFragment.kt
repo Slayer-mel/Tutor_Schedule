@@ -43,19 +43,15 @@ class UserFullInformationFragment : Fragment() {
 
 
     private fun initListeners() {
-        //TODO: Логически неверно объявлять переменную здесь. В данный момент ты сохраняешь
-        // юзера в переменную при вызове функции "initListeners". Далее лисенеры будут работать
-        // только с этой переменной. Если при каком-то сценарии юзер внутри currentUserEditable
-        // поменяется, лисенеры продолжат работать со старым юзером, который был сохранён в переменную
-        // userCurrent при вызове функции initListeners
-        val userCurrent = userViewModel.currentUserEditable.value
         with(binding) {
             btnMakeLesson.setOnClickListener {
+                val userCurrent = userViewModel.currentUserEditable.value
                 if (userCurrent != null) {
                     findNavController().navigate(R.id.action_userFullInformation_to_addLesson)
                 }
             }
             btnEdit.setOnClickListener {
+                val userCurrent = userViewModel.currentUserEditable.value
                 if (userCurrent != null) {
                     userViewModel.setCurrentUserEditable(userCurrent)
                     findNavController().navigate(R.id.action_userFullInformation_to_updateFragment)
@@ -68,34 +64,18 @@ class UserFullInformationFragment : Fragment() {
                  startActivityForResult(gallery, Constants.PICK_iMAGE)
              }*/
 
-            //TODO: Много логики в одном блоке. Раскидай по функциям
             btnTelegramWriteMessage.setOnClickListener {
-                val telegramIntent = Intent(Intent.ACTION_VIEW)
-                //val userTelegramID = "https://t.me/+380669617935"
-                //val userTelegramID = "https://t.me/Tetty_S"
-                val userTelegramID =
-                    userViewModel.currentUserEditable.value?.telegramPupilNumberOrId
-
+                val userTelegramID =userViewModel.currentUserEditable.value?.telegramPupilNumberOrId
                 if (userTelegramID.isNullOrEmpty()) {
-                    Toast.makeText(
-                        requireContext(),
-                        R.string.user_full_information_fragment_add_name_toast,
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    with(telegramIntent) {
-                        data = Uri.parse("${Constants.TELEGRAM_HTTP}$userTelegramID")
-                        setPackage(Constants.TELEGRAM_PACKAGE)
-                    }
-                    startActivity(telegramIntent)
-                }
+                    showToast(R.string.user_full_information_fragment_add_name_toast)
+                } else { messageToTelegramIntent(userTelegramID) }
             }
             btnDeleteUser.setOnClickListener {
                 AlertDialogProvider.createAlertInstance(
                     requireContext(),
                     R.layout.delete_user_alert_dialog,
                     onDelete = {
-                        showDeleteToast()
+                        showToast(R.string.common_snack_bar_user_delete)
                         deleteUser()
                     }
                 ).show()
@@ -120,20 +100,26 @@ class UserFullInformationFragment : Fragment() {
         }
     }
 
-    private fun showDeleteToast() {
+    private fun messageToTelegramIntent(inputUserTelegramID:String?) {
+        val telegramIntent = Intent(Intent.ACTION_VIEW)
+        with(telegramIntent) {
+            val userTelegramID = removeAt(telegramId = inputUserTelegramID)
+            data = Uri.parse("${Constants.TELEGRAM_HTTP}$userTelegramID")
+            setPackage(Constants.TELEGRAM_PACKAGE)
+        }
+        startActivity(telegramIntent)
+    }
+
+    private fun showToast(toastInt:Int) {
         Toast.makeText(
             requireContext(),
-            R.string.common_snack_bar_user_delete,
+            toastInt,
             Toast.LENGTH_LONG
         ).show()
     }
 
     private fun deleteUser() {
         val user = userViewModel.currentUserEditable.value
-        //TODO: Логически неправильно, что ты сначала навигируешься, а потом удаляешь
-        // юзера. Удаление, к тому же, может быть неудачным. Тебе нужно показыавть состояние
-        // загрузки пока идёт удаление (это пара миллисекунд, но тем не менее это логически верно)
-        // и только после того, как удаление прошло удачно, выполнять остальную логику
         user?.let { userViewModel.deleteUser(it) }
         findNavController().navigate(R.id.action_userFullInformation_to_listFragmentBlack)
     }
@@ -149,6 +135,10 @@ class UserFullInformationFragment : Fragment() {
                 btnMakeCall.text = user.phonePupilNumber
             }
         }
+    }
+
+    private fun removeAt(telegramId: String?): String {
+        return telegramId?.replace("@", "") ?: ""
     }
 
     private fun removeWhiteSpace(number: String): String {

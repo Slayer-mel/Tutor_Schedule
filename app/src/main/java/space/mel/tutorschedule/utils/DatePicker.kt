@@ -4,7 +4,7 @@ import android.app.DatePickerDialog
 import android.widget.DatePicker
 import java.util.*
 
-val calendar = Calendar.getInstance()
+val calendar: Calendar = Calendar.getInstance()
 val dateSetListener = object : DatePickerDialog.OnDateSetListener {
     override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int,
                            dayOfMonth: Int) {

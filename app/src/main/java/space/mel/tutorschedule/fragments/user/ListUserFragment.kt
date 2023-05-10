@@ -21,8 +21,8 @@ import space.mel.tutorschedule.utils.Constants
 import space.mel.tutorschedule.utils.SwipeHelper
 import space.mel.tutorschedule.viewmodel.UserViewModel
 
-//TODO: Не наследуй фрагмент от SearchView.OnQueryTextListener. Создай отдельный класс
-class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
+class ListUserFragment : Fragment()/*,
+    SearchView.OnQueryTextListener*/ {
     private var _binding: ListUserFragmentBlackBinding? = null
     private val binding get() = _binding!!
 
@@ -82,7 +82,7 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
             }
             //swipe delete item from Room DB
             ItemTouchHelper(
-                SwipeHelper{ viewHolderAdapterPosition->
+                SwipeHelper { viewHolderAdapterPosition ->
                     val user = listUserAdapter.currentList[viewHolderAdapterPosition]
                     lifecycleScope.launch {
                         userViewModel.deleteUser(user)
@@ -99,7 +99,8 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
             }
         }
         //search Query
-        binding.search.setOnQueryTextListener(this)
+        searchQuery()
+        //binding.search.setOnQueryTextListener(this)
     }
 
     private fun startFullInformation(user: User) {
@@ -108,27 +109,30 @@ class ListUserFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun searchDatabase(query: String) {
-        //TODO: Нахрена тебе знаки процента в запросе?
-        val searchQuery = "%$query%"
-        userViewModel.searchDatabase(searchQuery).observe(this) { list ->
+            userViewModel.searchDatabase(query).observe(this) { list ->
             list.let { listOfUser ->
                 listUserAdapter.submitList(listOfUser)
             }
         }
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        return false
+    private fun searchQuery() {
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                if (query != null) {
+                    searchDatabase(query)
+                }
+                return true
+            }
+        })
     }
 
-    override fun onQueryTextChange(query: String?): Boolean {
-        if (query != null) {
-            searchDatabase(query)
-        }
-        return true
-    }
     override fun onDestroy() {
         super.onDestroy()
-        _binding=null
+        _binding = null
     }
 }
