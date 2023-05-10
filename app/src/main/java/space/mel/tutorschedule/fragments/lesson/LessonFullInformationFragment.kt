@@ -18,6 +18,7 @@ import space.mel.tutorschedule.viewmodel.UserViewModel
 
 class LessonFullInformationFragment : Fragment() {
     private var _binding: LessonFullInformationFragmentBlackBinding? = null
+
     private val binding get() = _binding!!
     private val userViewModel by activityViewModel<UserViewModel>()
     private val lessonViewModel by activityViewModel<LessonViewModel>()
@@ -86,6 +87,7 @@ class LessonFullInformationFragment : Fragment() {
     private fun initObservers() {
         lessonViewModel.currentLessonEditable.observe(viewLifecycleOwner) { lesson ->
             with(binding) {
+                //TODO: Шо это за говно закомменченое? Или удали, или раскомментируй
                 /*tvName.text = user.name
                 tvGrade.text = user.grade.toString()+" класс"
                 btnMakeCall.text = user.phonePupilNumber*/

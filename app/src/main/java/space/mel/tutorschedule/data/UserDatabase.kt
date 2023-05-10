@@ -15,6 +15,8 @@ import space.mel.tutorschedule.model.UserIdTypeConverter
         User::class,
         Lesson::class
     ],
+    //TODO: ПОВТОР. Нахуя тебе аж 7-я версия?
+    // Нахуя ты пишешь 7, если не понимаешь зачем тут 7?
     version = 7,
     exportSchema = false
 )

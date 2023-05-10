@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import space.mel.tutorschedule.databinding.BlankFragmentBinding
 
+//TODO: Зачем тебе пустой фрагмент?
 class BlankFragment : Fragment() {
     private var _binding: BlankFragmentBinding? = null
     private val binding get() = _binding!!

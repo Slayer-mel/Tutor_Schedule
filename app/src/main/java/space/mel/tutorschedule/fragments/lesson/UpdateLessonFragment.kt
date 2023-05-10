@@ -15,6 +15,7 @@ import space.mel.tutorschedule.viewmodel.UserViewModel
 
 class UpdateLessonFragment: Fragment() {
 
+    //TODO: Поудаляй ненужный код
     private var _binding: UpdateLessonFragmentBlackBinding? = null
     private val binding get() = _binding!!
     private val lessonViewModel by activityViewModel<LessonViewModel>()

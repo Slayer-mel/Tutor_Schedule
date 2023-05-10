@@ -17,6 +17,7 @@ interface LessonDao {
     @Query("SELECT * FROM user_table WHERE id= :id")
     suspend fun getUserWithLessons(id: String): List<UserWithLessons>
 
+    //TODO: переименуй функцию. Ты получаешь список из лессонов, а не один
     @Query("SELECT * FROM Lesson")
     fun getLesson() : Flow<List<Lesson>>
 }

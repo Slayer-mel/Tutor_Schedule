@@ -51,7 +51,10 @@ class AddLessonFragment : Fragment() {
                 val currentLessonTimeAndDate =
                     addLessonViewModel.currentLessonTimeAndDateLiveData.value
                 setLessonToCalendarIntent(currentLessonTimeAndDate)
-                addLessonViewModel.addLesson(userViewModel.currentUserEditable.value?.let { user ->
+                //TODO: Добавь наверное ещё в userViewModel функцию чтоб отдавала
+                // тебе список из userId. Тут тоже норм, но не красиво смотрится
+                addLessonViewModel.addLesson(
+                    userViewModel.currentUserEditable.value?.let { user ->
                     listOf(user.id)
                 })
             }
@@ -81,6 +84,8 @@ class AddLessonFragment : Fragment() {
         findNavController().navigate(R.id.action_addLesson_to_userFullInformation)
     }
 
+    //TODO: Хуёвое имя. В этой функции конечная цель - навигация на другую активити,
+    // вот и назови соответствующе
     private fun setLessonToCalendarIntent(currentLessonTimeAndDate: Long?) {
         val title = userViewModel.currentUserEditable.value?.name
         val intent = Intent(Intent.ACTION_INSERT)

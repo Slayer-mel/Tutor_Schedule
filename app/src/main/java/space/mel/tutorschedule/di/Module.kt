@@ -22,6 +22,7 @@ private val loadFeature by lazy {
     )
 }
 
+//TODO: Все эти databaseModule, repositoryModule и т.д желательно должны быть в разных файлах
 val databaseModule = module {
     single { Room.databaseBuilder(get(), UserDatabase::class.java, DATABASE_NAME,).build()}
     single { get<UserDatabase>().userDao() }

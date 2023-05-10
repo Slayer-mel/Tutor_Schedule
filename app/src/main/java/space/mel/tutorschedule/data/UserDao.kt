@@ -26,6 +26,7 @@ interface UserDao {
             " '%' OR grade LIKE '%' || :searchQuery  ||'%'")
     fun searchDatabase (searchQuery: String): Flow<List<User>>
 
+    //TODO: То же самое, что и с лессонами. Переименуй функцию
     @Query("SELECT * FROM user_table")
     fun getUser() : Flow<List<User>>
 

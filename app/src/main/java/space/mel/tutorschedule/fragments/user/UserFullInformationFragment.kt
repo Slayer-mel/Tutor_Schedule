@@ -100,6 +100,8 @@ class UserFullInformationFragment : Fragment() {
         }
     }
 
+    //TODO: Переименуй функцию, название говно. Конечная
+    // цель - навигация не создание интента, а навигация в телегу
     private fun messageToTelegramIntent(inputUserTelegramID:String?) {
         val telegramIntent = Intent(Intent.ACTION_VIEW)
         with(telegramIntent) {
@@ -128,6 +130,9 @@ class UserFullInformationFragment : Fragment() {
     private fun initObservers() {
         userViewModel.currentUserEditable.observe(viewLifecycleOwner) { user ->
             with(binding) {
+                //TODO: Я смотрю у тебя логов дохуя. Используй дебаггер. В будущем,
+                // когда у тебя будет большой проект и он будет собираться по 15 минут,
+                // тебе будет очень неудобно и долго бедажить в помощью Log.d
                 Log.d("USERFULL", "user = $user")
                 tvName.text = user.name
                 tvGrade.text = "${user.grade} ${getString(R.string.common_grade_lowercase)}"

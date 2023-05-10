@@ -18,9 +18,11 @@ class ListLessonAdapter(val onClick: (Lesson) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(lesson: Lesson) {
             binding.apply {
+                //TODO: Для всех конвертаций времени используй DateTimeHelper. Ты ж не зря его создавал
                 val simpleDateFormat = SimpleDateFormat("EEEE, dd.MM.yyyy \n HH:mm ", Locale.getDefault())
                 val dateString = simpleDateFormat.format(lesson.dataOfLesson)
                 tvLessonDate.text = stringCapitalize(dateString)
+                //TODO: Удоли
                 //tvLessonDate.text = dateString.capitalize(Locale.ROOT)
 
                 root.setOnClickListener {

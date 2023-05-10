@@ -39,6 +39,8 @@ class LessonViewModel(
         }
     }
 
+    //TODO: Мы ж разбирались, что этот sealed class нахуй не нужен.
+    // Поэтому родителя можешь убить, а ребёнка использовать по назначению
     sealed class LessonEvent{
         data class ShowUndoDeleteLessonMessage(val lesson: Lesson) : LessonEvent()
     }
